@@ -8,10 +8,13 @@ use App\Repository\AuthorRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
+use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Faker;
 
 class ArticlesTest extends KernelTestCase
-{
+{    
+    use RefreshDatabaseTrait;
+
     /** @var AbstractDatabaseTool */
     protected $databaseTool;
 
@@ -22,18 +25,18 @@ class ArticlesTest extends KernelTestCase
         parent::setUp();
 
         $this->container = self::getContainer();
-        $this->authorRepository = self::getContainer()->get(AuthorRepository::class);
-        $this->articleRepository = self::getContainer()->get(ArticleRepository::class);
-        $this->databaseTool = static::getContainer()->get(DatabaseToolCollection::class)->get();
-    }
-
-    public function testCount(): void
-    {
+        $this->authorRepository = $this->container->get(AuthorRepository::class);
+        $this->articleRepository = $this->container->get(ArticleRepository::class);
+        $this->databaseTool = $this->container->get(DatabaseToolCollection::class)->get();
+        
         $this->databaseTool->loadAliceFixture([
             'fixtures/Repository/AuthorsTestFixtures.yml', 
             'fixtures/Repository/ArticlesTestFixtures.yml'
         ]);
+    }
 
+    public function testCount(): void
+    {
         $articles = $this->container->get(ArticleRepository::class)->count([]);
         $this->assertEquals(8, $articles);
     }
@@ -41,10 +44,6 @@ class ArticlesTest extends KernelTestCase
     public function testAddArticle(): void
     {
         $faker = Faker\Factory::create('fr_FR');
-        $this->databaseTool->loadAliceFixture([
-            'fixtures/Repository/AuthorsTestFixtures.yml', 
-            'fixtures/Repository/ArticlesTestFixtures.yml'
-        ]);
 
         $authors = $this->authorRepository->findAll();
 
@@ -66,11 +65,6 @@ class ArticlesTest extends KernelTestCase
 
     public function testDeleteArticle(): void
     {
-        $this->databaseTool->loadAliceFixture([
-            'fixtures/Repository/AuthorsTestFixtures.yml', 
-            'fixtures/Repository/ArticlesTestFixtures.yml'
-        ]);
-
         $articles = $this->articleRepository->findAll();
         $this->articleRepository->remove($articles[0], true);
 
