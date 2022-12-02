@@ -1,0 +1,8 @@
+App\Entity\Article:
+  article{1..8}:
+    title: <sentence(3, 6)>
+    text: <realText(500, 5)>
+    state: <boolean()>
+    created: <dateTime()>
+    updated: <dateTime()>
+    author: "@author*"

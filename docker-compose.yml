@@ -1,0 +1,64 @@
+version: "3.8"
+
+services:
+
+  server:
+    image: test-server:v1.0
+    build:
+      context: .
+      dockerfile: ./tools/docker/php/Dockerfile
+    container_name: test-server
+    volumes:
+      - ./:/var/www/html:rw
+    ports:
+      - 80:80
+    links:
+      - mysql
+      - redis
+
+  adminer:
+    image: test-adminer:v1.0
+    build:
+      context: .
+      dockerfile: ./tools/docker/adminer/Dockerfile
+    container_name: test-adminer
+    ports:
+      - 8080:8080
+    volumes:
+      - ./var/db:/var/www/html/var/db:rw
+
+  mysql:
+    image: mysql:${MYSQL_VERSION:-5.7}
+    container_name: test-mysql
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-toor}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./var/db:/var/lib/mysql:rw
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: test-phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-toor}
+    links:
+      - mysql
+    ports:
+      - 8090:80
+
+  mailer:
+    image: schickling/mailcatcher
+    container_name: test-mailcatcher
+    ports: 
+      - 1025:1025
+      - 1080:1080
+  
+  redis:
+    image: redis
+    container_name: test-redis
+    ports:
+      - 6379:6379

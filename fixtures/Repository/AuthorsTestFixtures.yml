@@ -1,0 +1,5 @@
+App\Entity\Author:
+  author{1..8}:
+    firstname: <firstname()>
+    lastname: <lastname()>
+    email: <email()>
