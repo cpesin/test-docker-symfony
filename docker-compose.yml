@@ -35,8 +35,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-toor}
     ports:
       - 3306:3306
-    volumes:
-      - ./var/db:/var/lib/mysql:rw
+    #volumes:
+    #  - ./var/db:/var/lib/mysql:rw
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

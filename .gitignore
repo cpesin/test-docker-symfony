@@ -18,3 +18,8 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> tools/php-cs-fixer ###
+tools/php-cs-fixer/
+.php-cs-fixer.cache
+###< tools/php-cs-fixer ###

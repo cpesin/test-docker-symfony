@@ -15,8 +15,7 @@ class SendController extends AbstractController
     public function send(Request $request): Response
     {
         return $this->renderForm('contact/send.html.twig', [
-            'data' => $this->data
+            'data' => $this->data,
         ]);
     }
-
 }

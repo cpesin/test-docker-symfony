@@ -41,6 +41,12 @@ load_fixtures:
 phpunit:
 	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'bin/phpunit'
 
+phpcs:
+	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --diff --config=.php-cs-fixer.dist.php'
+
+phpcs_dry_run:
+	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php'
+
 ## —— Others 🛠️️ —————————————————————————————————————————————————————————————————
 help: ## Commands list
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'

@@ -2,20 +2,19 @@
 
 namespace App\Controller;
 
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email as MimeEmail;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ContactController extends AbstractController
 {
@@ -24,13 +23,11 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'app_contact')]
     public function index(Request $request, MailerInterface $mailer): Response
     {
-
         $form = $this->getform();
-        
+
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
-
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->data = $form->getData();
 
             $send = $this->sendEmail($mailer);
@@ -39,7 +36,7 @@ class ContactController extends AbstractController
         }
 
         return $this->renderForm('contact/index.html.twig', [
-            'form' => $form
+            'form' => $form,
         ]);
     }
 
@@ -57,7 +54,7 @@ class ContactController extends AbstractController
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 3]),
-                ]
+                ],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
@@ -71,7 +68,7 @@ class ContactController extends AbstractController
                     new Email(),
                     new NotBlank(),
                     new Length(['min' => 10]),
-                ]
+                ],
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Message',
@@ -84,11 +81,11 @@ class ContactController extends AbstractController
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 10]),
-                ]
+                ],
             ])
             ->add('submit', SubmitType::class)
             ->getForm();
-        
+
         return $form;
     }
 
@@ -101,11 +98,9 @@ class ContactController extends AbstractController
             ->text('Sending emails is fun again!')
             ->html('<p>name: '.$this->data['name'].'</p><p>email: '.$this->data['email'].'</p><p>message: '.$this->data['message'].'</p>');
 
-        try{
+        try {
             $mailer->send($email);
-        } 
-        catch(Exception $e)
-        {
+        } catch (\Exception $e) {
             echo $e;
             exit;
         }

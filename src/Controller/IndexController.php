@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\ArticleRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-use App\Repository\ArticleRepository;
 
 class IndexController extends AbstractController
 {
@@ -14,11 +13,11 @@ class IndexController extends AbstractController
     public function index(ArticleRepository $articleRepository): Response
     {
         $lastArticle = $articleRepository->findOneBy(
-            ['state' => 1], 
+            ['state' => 1],
             ['created' => 'DESC']
         );
-        
-        return $this->render('main/index.html.twig', [ 
+
+        return $this->render('main/index.html.twig', [
             'lastArticle' => $lastArticle,
         ]);
     }
