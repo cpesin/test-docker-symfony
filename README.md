@@ -10,6 +10,7 @@ You can use this project to play with :
 * Sqlite / Adminer
 * Redis
 * Mailcatcher
+* Bootstrap
 
 ## Requirements
 
@@ -38,9 +39,16 @@ Load fixtures :
 `make load_fixtures`
 
 Use `make bash` to enter in main container (server).
+
 Stop docker's containers with `make stop`.
 
 ## Run tests
 
 Run phpUnit's tests :
 `make phpunit`
+
+Run phpCs (dry-run) :
+`make phpcs`
+
+Run phpCs (fix automatically) :
+`make phpcs_fix`
