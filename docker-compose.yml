@@ -8,6 +8,15 @@ services:
       context: .
       dockerfile: ./tools/docker/php/Dockerfile
     container_name: test-server
+    environment:
+      BDD_VERSION: ${MYSQL_VERSION:-5.7}
+      BDD_TYPE: mysql
+      BDD_HOST: mysql
+      BDD_PORT: ${MYSQL_PORT:-3306}
+      BDD_CHARSET: ${MYSQL_CHARSET:-utf8mb4}
+      BDD_USER: ${MYSQL_USER:-user}
+      BDD_PASSWORD: ${MYSQL_PASSWORD:-resu}
+      BDD_DATABASE: ${MYSQL_DATABASE:-app}
     volumes:
       - ./:/var/www/html:rw
     ports:
@@ -31,12 +40,12 @@ services:
     image: mysql:${MYSQL_VERSION:-5.7}
     container_name: test-mysql
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-toor}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
+      MYSQL_USER: ${MYSQL_USER:-user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-resu}
     ports:
-      - 3306:3306
-    #volumes:
-    #  - ./var/db:/var/lib/mysql:rw
+      - ${MYSQL_PORT}:${MYSQL_PORT}
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

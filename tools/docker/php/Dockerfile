@@ -1,8 +1,11 @@
 # Base
 FROM php:8.1.12-apache-bullseye
 
+# Environment variables
+ENV WEB_FOLDER=/var/www/html
+
 # Define workdir
-WORKDIR /var/www/html
+WORKDIR ${WEB_FOLDER}
 
 # Softwares
 RUN apt-get update && apt-get install -y \
@@ -61,12 +64,6 @@ COPY ./tools/docker/config/default-vhost.conf /etc/apache2/sites-available/
 RUN a2dissite 000-default.conf \
     && a2ensite default-vhost.conf 
 
-# Add Apache user
-RUN useradd -r --create-home -u 998 1000 \
-    && adduser 1000 root \
-    && adduser 1000 www-data \
-    && chown -R www-data:www-data /var/www
-
 # Symfony CLI
 RUN wget https://get.symfony.com/cli/installer -O - | bash \
     && chmod +x /root/.symfony5/bin/symfony \
@@ -91,6 +88,12 @@ RUN pear config-set http_proxy "${http_proxy}" \
     && pecl install apcu
 RUN echo "extension=apcu.so\napc.enable_cli=on" > /usr/local/etc/php/conf.d/apcu.ini
 
+# Add Apache user
+RUN useradd -r --create-home -u 998 1000 \
+    && adduser 1000 root \
+    && adduser 1000 www-data \
+    && echo '%998 ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
 # Aliases
 RUN echo "alias arc='service apache2 reload'" >> /root/.bashrc \
     && echo "alias epi='nano /usr/local/etc/php/php.ini'" >> /root/.bashrc
@@ -100,6 +103,11 @@ RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add files
-#COPY . .
+#COPY --chown=www-data:www-data . ${WEB_FOLDER}
 
-CMD ["apache2-foreground"]
+# Add Entrypoint
+COPY ./tools/scripts/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Run
+CMD ["/usr/local/bin/docker-entrypoint.sh"]

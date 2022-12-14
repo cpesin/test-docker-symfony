@@ -15,6 +15,9 @@ SYMFONY = @$(DOCKER_EXEC) $(SERVER) /bin/bash -c
 
 ## —— Docker 🐳  ———————————————————————————————————————————————————————————————
 build: ## Build dev docker images
+	@$(DOCKER_COMPOSE) build
+
+build_no_cache: ## Build dev docker images without cache
 	@$(DOCKER_COMPOSE) build --no-cache
 
 up: ## Run project containers
