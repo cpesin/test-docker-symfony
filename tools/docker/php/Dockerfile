@@ -88,6 +88,12 @@ RUN pear config-set http_proxy "${http_proxy}" \
     && pecl install apcu
 RUN echo "extension=apcu.so\napc.enable_cli=on" > /usr/local/etc/php/conf.d/apcu.ini
 
+# X-Debug
+RUN pecl install xdebug-3.2.0 \
+    && echo 'xdebug.mode=develop,debug,coverage' >> /usr/local/etc/php/php.ini \
+    && echo 'xdebug.client_host=host.docker.internal' >> /usr/local/etc/php/php.ini \
+    && docker-php-ext-enable xdebug
+
 # Add Apache user
 RUN useradd -r --create-home -u 998 1000 \
     && adduser 1000 root \
