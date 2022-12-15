@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
-use Faker;
 
 class AuthorsTest extends KernelTestCase
 {
@@ -40,26 +39,39 @@ class AuthorsTest extends KernelTestCase
 
     public function testAddAuthor(): void
     {
-        $faker = Faker\Factory::create('fr_FR');
+        $authors = $this->authorRepository->count([]);
+        $this->assertEquals(8, $authors);
 
         $author = new Author();
-        $author->setFirstname($faker->firstname());
-        $author->setLastname($faker->lastname());
-        $author->setEmail($faker->email());
+        $author->setFirstname('Firstname1');
+        $author->setLastname('Lastname1');
+        $author->setEmail('email1@test.com');
 
         $this->authorRepository->save($author, true);
 
         $authors = $this->authorRepository->count([]);
         $this->assertEquals(9, $authors);
+
+        $author = $this->authorRepository->findOneBy(['email' => 'email1@test.com']);
+        $this->assertEquals('Firstname1', $author->getFirstname());
+        $this->assertEquals('Lastname1', $author->getLastname());
     }
 
     public function testDeleteAuthor(): void
     {
+        $authors = $this->authorRepository->count([]);
+        $this->assertEquals(8, $authors);
+
         $authors = $this->authorRepository->findAll();
-        $this->authorRepository->remove($authors[0], true);
+
+        $remove_author = $authors[0];
+        $this->authorRepository->remove($remove_author, true);
 
         $authors = $this->authorRepository->count([]);
         $this->assertEquals(7, $authors);
+        
+        $author = $this->authorRepository->findOneBy(['id' => $remove_author->getId()]);
+        $this->assertEquals(0, $author);
     }
     
     protected function tearDown(): void

@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
-use Faker;
 
 class ArticlesTest extends KernelTestCase
 {    
@@ -43,33 +42,45 @@ class ArticlesTest extends KernelTestCase
     
     public function testAddArticle(): void
     {
-        $faker = Faker\Factory::create('fr_FR');
-
+        $articles = $this->articleRepository->count([]);
+        $this->assertEquals(8, $articles);
+        
         $authors = $this->authorRepository->findAll();
 
         $article = new Article();
-        $article->setTitle($faker->sentence($faker->numberBetween(3, 6)));
-        $article->setText($faker->realText($maxNbChars = 500, $indexSize = 5));
-        $article->setState($faker->boolean($chanceOfGettingTrue = 90));
-        $article->setCreated($faker->dateTimeInInterval($startDate = '-2 years', $interval = '+1 year', $timezone = 'Europe/Paris'));
-        $article->setUpdated($faker->dateTimeInInterval($startDate = '-6 months', $interval = '+3 months', $timezone = 'Europe/Paris'));
-        
-        
-        $article->setAuthor($authors[random_int(0, 7)]);
+        $article->setTitle('Article 1');
+        $article->setText('Lorem ipsum...');
+        $article->setState(true);
+        $article->setCreated(new \DateTime('now'));
+        $article->setUpdated(new \DateTime('now'));
+        $article->setAuthor($authors[0]);
 
         $this->articleRepository->save($article, true);
 
         $articles = $this->articleRepository->count([]);
         $this->assertEquals(9, $articles);
+
+        $article = $this->articleRepository->findOneBy(['title' => 'Article 1']);
+        $this->assertEquals('Lorem ipsum...', $article->getText());
+        $this->assertEquals(true, $article->isState());
+        $this->assertEquals(1, $article->getAuthor()->getId());
     }
 
     public function testDeleteArticle(): void
     {
+        $articles = $this->articleRepository->count([]);
+        $this->assertEquals(8, $articles);
+
         $articles = $this->articleRepository->findAll();
-        $this->articleRepository->remove($articles[0], true);
+
+        $remove_article = $articles[0];
+        $this->articleRepository->remove($remove_article, true);
 
         $articles = $this->articleRepository->count([]);
         $this->assertEquals(7, $articles);
+
+        $article = $this->articleRepository->findOneBy(['id' => $remove_article->getId()]);
+        $this->assertEquals(0, $article);
     }
 
     protected function tearDown(): void
