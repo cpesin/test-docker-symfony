@@ -1,6 +1,6 @@
 ## —— Misc 🛠️️ —————————————————————————————————————————————————————————————————
 .DEFAULT_GOAL = help
-.PHONY: # complete if needed
+.PHONY: coverage # complete if needed
 
 ## —— Global 🛠️️ —————————————————————————————————————————————————————————————————
 help: ## Commands list
@@ -53,6 +53,9 @@ load_fixtures: ## Load database's fixtures
 ## —— Tests ✅ ———————————————————————————————————————————————————————————————
 phpunit: ## Run phpunit
 	@$(SYMFONY) 'bin/phpunit'
+
+coverage: ## Run phpunit with code coverage
+	@$(SYMFONY) 'bin/phpunit --coverage-html coverage'
 
 phpcs_fix: ## Run php-cs-fixer 
 	@$(SYMFONY) 'tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --diff --config=.php-cs-fixer.dist.php'

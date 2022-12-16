@@ -47,8 +47,16 @@ Stop docker's containers with `make stop`.
 Run phpUnit's tests :
 `make phpunit`
 
+Run phpUnit's tests with code coverage :
+`make coverage`
+
+Code coverage is available at : coverage/index.html
+
 Run phpCs (dry-run) :
 `make phpcs`
 
 Run phpCs (fix automatically) :
 `make phpcs_fix`
+
+Run phpStan :
+`make phpstan`
