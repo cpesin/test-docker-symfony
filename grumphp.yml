@@ -1,12 +1,8 @@
 grumphp:
-    environment:
-        paths:
-            - bin
-            - tools/php-cs-fixer/vendor/bin
     tasks: { 
-        #phpcsfixer: null, 
+        phpcsfixer: null, 
         phpstan: null, 
-        #phpunit: null,
+        phpunit: null,
         securitychecker_symfony: null 
     }
     ascii:
