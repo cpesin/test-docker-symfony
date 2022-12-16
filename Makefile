@@ -34,10 +34,10 @@ redis: up ## Run bash in redis container
 
 ## —— Symfony 🎶 ———————————————————————————————————————————————————————————————
 composer_update: composer.jon ## Run composer update
-	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'composer update'
+	@$(SYMFONY) 'composer update'
 
 composer_install: composer.lock ## run composer install
-	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'composer install'
+	@$(SYMFONY) 'composer install'
 
 install: composer_install ## Alias of composer_install / composer_update
 
@@ -52,13 +52,13 @@ load_fixtures: ## Load database's fixtures
 
 ## —— Tests ✅ ———————————————————————————————————————————————————————————————
 phpunit: ## Run phpunit
-	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'bin/phpunit'
+	@$(SYMFONY) 'bin/phpunit'
 
 phpcs_fix: ## Run php-cs-fixer 
-	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --diff --config=.php-cs-fixer.dist.php'
+	@$(SYMFONY) 'tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --diff --config=.php-cs-fixer.dist.php'
 
 phpcs: ## Run php-cs-fixer with dry run
-	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php'
+	@$(SYMFONY) 'tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php'
 
-phpstan: 
-	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'vendor/bin/phpstan analyse'
+phpstan: ## RUN phpstan
+	@$(SYMFONY) 'vendor/bin/phpstan analyse'
