@@ -12,7 +12,7 @@ class ArticlesController extends AbstractController
     #[Route('/articles', name: 'app_articles')]
     public function index(ArticleRepository $articleRepository): Response
     {
-        $articles = $articleRepository->findAll(
+        $articles = $articleRepository->findBy(
             ['state' => 1],
             ['created' => 'DESC']
         );

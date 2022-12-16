@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -18,6 +19,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ContactController extends AbstractController
 {
+    /**
+     * @var mixed
+     */
     private $data;
 
     #[Route('/contact', name: 'app_contact')]
@@ -30,7 +34,7 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->data = $form->getData();
 
-            $send = $this->sendEmail($mailer);
+            $this->sendEmail($mailer);
 
             return $this->redirectToRoute('app_contact_send');
         }
@@ -40,7 +44,7 @@ class ContactController extends AbstractController
         ]);
     }
 
-    private function getForm()
+    private function getForm(): FormInterface
     {
         $form = $this->createFormBuilder()
             ->add('name', TextType::class, [
@@ -104,5 +108,7 @@ class ContactController extends AbstractController
             echo $e;
             exit;
         }
+
+        return;
     }
 }

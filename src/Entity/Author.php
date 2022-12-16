@@ -24,6 +24,7 @@ class Author
     #[ORM\Column(length: 100)]
     private ?string $email = null;
 
+    /** @var Collection<int, Article> */
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Article::class, orphanRemoval: true)]
     private Collection $articles;
 
@@ -83,7 +84,7 @@ class Author
 
     public function addArticle(Article $article): self
     {
-        if (!$this->articles->contains($article)) {
+        if (false === $this->articles->contains($article)) {
             $this->articles->add($article);
             $article->setAuthor($this);
         }

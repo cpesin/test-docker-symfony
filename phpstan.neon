@@ -1,0 +1,7 @@
+parameters:
+	level: 9
+	paths:
+		- src
+	ignoreErrors:
+		- '#Cannot access offset .* on mixed.#'
+		- '#Call to an undefined method Faker\\Generator.*#'

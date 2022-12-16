@@ -59,3 +59,6 @@ phpcs_fix: ## Run php-cs-fixer
 
 phpcs: ## Run php-cs-fixer with dry run
 	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php'
+
+phpstan: 
+	@$(DOCKER_EXEC) $(SERVER) /bin/bash -c 'vendor/bin/phpstan analyse'
