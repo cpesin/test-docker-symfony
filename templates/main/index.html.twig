@@ -13,4 +13,13 @@
     </div>
   </div>
 </div>
+
+<div class="card border-secondary mb-3">
+  <div class="card-header">README.md</em></div>
+  <div class="card-body">
+    <div class="card-text">
+        {% apply markdown_to_html %}{{ readme }}{% endapply %}
+    </div>
+  </div>
+</div>
 {% endblock %}

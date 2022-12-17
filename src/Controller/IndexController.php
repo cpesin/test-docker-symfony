@@ -19,6 +19,14 @@ class IndexController extends AbstractController
 
         return $this->render('main/index.html.twig', [
             'lastArticle' => $lastArticle,
+            'readme' => $this->getReadMe()
         ]);
+    }
+
+    private function getReadMe(): string
+    {
+        $readme = file_get_contents(__DIR__.'/../../README.md');
+        $readme = $readme === false ? '' : $readme;
+        return $readme;
     }
 }
