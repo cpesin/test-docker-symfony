@@ -1,6 +1,9 @@
 A simple project to test Docker, Symfony and other stuff...
 ===========
 
+![GitHub](https://img.shields.io/github/license/cpesin/test-docker-symfony)
+![GitHub last commit](https://img.shields.io/github/last-commit/cpesin/test-docker-symfony)
+
 ## Features
 
 You can use this project to play with :
@@ -42,6 +45,26 @@ Use `make bash` to enter in main container (server).
 
 Stop docker's containers with `make stop`.
 
+## Links
+
+Website :
+`http://localhost`
+
+PHPMyAdmin : 
+`http://localhost:8090`
+
+Mailcatcher : 
+`http://localhost:1080`
+
+Adminer : 
+`http://localhost:8080`
+
+With :
+- System : SQLite 3
+- Utilisateur : root
+- Mot de passe : test
+- Base de données : var/db/app_test.db
+
 ## Run tests
 
 Run phpUnit's tests :
@@ -50,7 +73,7 @@ Run phpUnit's tests :
 Run phpUnit's tests with code coverage :
 `make coverage`
 
-Code coverage is available at : coverage/index.html
+Code coverage is available at : `http://localhost/coverage/index.html`
 
 Run phpCs (dry-run) :
 `make phpcs`
