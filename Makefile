@@ -59,10 +59,10 @@ coverage: ## Run phpunit with code coverage
 	@$(SYMFONY) 'bin/phpunit --coverage-html coverage'
 
 phpcs_fix: ## Run php-cs-fixer 
-	@$(SYMFONY) 'tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --diff --config=.php-cs-fixer.dist.php'
+	@$(SYMFONY) 'vendor/bin/php-cs-fixer fix src --diff --config=.php-cs-fixer.dist.php'
 
 phpcs: ## Run php-cs-fixer with dry run
-	@$(SYMFONY) 'tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php'
+	@$(SYMFONY) 'vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php'
 
 phpstan: ## RUN phpstan
 	@$(SYMFONY) 'vendor/bin/phpstan analyse'

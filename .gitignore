@@ -20,7 +20,7 @@
 /coverage/
 ###< phpunit/phpunit ###
 
-###> tools/php-cs-fixer ###
-tools/php-cs-fixer/
-.php-cs-fixer.cache
-###< tools/php-cs-fixer ###
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
