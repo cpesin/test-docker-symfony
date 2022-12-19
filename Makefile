@@ -46,6 +46,7 @@ database_create: ## Create database define in .env file
 
 schema_update: ## Create database schema define in app
 	@$(SYMFONY) 'bin/console doctrine:schema:update --force --no-interaction'
+	@$(SYMFONY) 'bin/console doctrine:schema:update --env=test --force --no-interaction'
 
 load_fixtures: ## Load database's fixtures
 	@$(SYMFONY) 'bin/console doctrine:fixtures:load'
