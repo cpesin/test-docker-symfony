@@ -73,7 +73,7 @@ Run phpUnit's tests :
 Run phpUnit's tests with code coverage :
 `make coverage`
 
-Code coverage is available at : `http://localhost/coverage/index.html`
+Code coverage is available at : `./coverage/index.html`
 
 Run phpCs (dry-run) :
 `make phpcs`
