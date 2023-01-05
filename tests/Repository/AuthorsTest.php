@@ -4,6 +4,8 @@ namespace App\Tests\Repository;
 
 use App\Entity\Author;
 use App\Repository\AuthorRepository;
+use App\Repository\ArticleRepository;
+use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
@@ -26,9 +28,13 @@ class AuthorsTest extends KernelTestCase
 
         $this->container = self::getContainer();
         $this->authorRepository = $this->container->get(AuthorRepository::class);
+        $this->articleRepository = $this->container->get(ArticleRepository::class);
         $this->databaseTool = $this->container->get(DatabaseToolCollection::class)->get();
 
-        $this->databaseTool->loadAliceFixture(['fixtures/Repository/AuthorsTestFixtures.yml']);
+        $this->databaseTool->loadAliceFixture([
+            'fixtures/Repository/AuthorsTestFixtures.yml', 
+            'fixtures/Repository/ArticlesTestFixtures.yml'
+        ]);
     }
 
     public function testCount(): void
@@ -55,6 +61,45 @@ class AuthorsTest extends KernelTestCase
         $author = $this->authorRepository->findOneBy(['email' => 'email1@test.com']);
         $this->assertEquals('Firstname1', $author->getFirstname());
         $this->assertEquals('Lastname1', $author->getLastname());
+        $this->assertEquals('email1@test.com', $author->getEmail());
+    }
+
+    public function testAddArticleToAuthor(): void
+    {
+        $article = $this->articleRepository->findOneBy(
+            ['state' => 1],
+            ['created' => 'DESC']
+        );
+        
+        $author = new Author();
+        $author->setFirstname('Firstname1');
+        $author->setLastname('Lastname1');
+        $author->setEmail('email1@test.com');
+        $author->addArticle($article);
+        
+        $this->authorRepository->save($author, true);
+
+        $this->assertCount(1, $author->getArticles());
+    }
+
+    public function testRemoveArticleToAuthor(): void
+    {
+        $article = $this->articleRepository->findOneBy(
+            ['state' => 1],
+            ['created' => 'DESC']
+        );
+        
+        $author = new Author();
+        $author->setFirstname('Firstname1');
+        $author->setLastname('Lastname1');
+        $author->setEmail('email1@test.com');
+        $author->addArticle($article);
+        
+        $this->authorRepository->save($author, true);
+
+        $author->removeArticle($article);
+
+        $this->assertCount(0, $author->getArticles());
     }
 
     public function testDeleteAuthor(): void

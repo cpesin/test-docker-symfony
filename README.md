@@ -13,6 +13,7 @@ You can use this project to play with :
 * Sqlite / Adminer
 * Redis
 * Mailcatcher
+* Traefik
 * Bootstrap
 
 ## Requirements
@@ -48,13 +49,16 @@ Stop docker's containers with `make stop`.
 ## Links
 
 Website :
-`http://localhost`
+`https://test-docker-symfony.traefik.me/`
 
 PHPMyAdmin : 
 `http://localhost:8090`
 
 Mailcatcher : 
 `http://localhost:1080`
+
+Traefik : 
+`http://localhost:8081`
 
 Adminer : 
 `http://localhost:8080`

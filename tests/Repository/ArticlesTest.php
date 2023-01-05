@@ -47,12 +47,14 @@ class ArticlesTest extends KernelTestCase
         
         $authors = $this->authorRepository->findAll();
 
+        $date = new \DateTime('now');
+
         $article = new Article();
         $article->setTitle('Article 1');
         $article->setText('Lorem ipsum...');
         $article->setState(true);
-        $article->setCreated(new \DateTime('now'));
-        $article->setUpdated(new \DateTime('now'));
+        $article->setCreated($date);
+        $article->setUpdated($date);
         $article->setAuthor($authors[0]);
 
         $this->articleRepository->save($article, true);
@@ -61,9 +63,12 @@ class ArticlesTest extends KernelTestCase
         $this->assertEquals(9, $articles);
 
         $article = $this->articleRepository->findOneBy(['title' => 'Article 1']);
+        $this->assertEquals('Article 1', $article->getTitle());
         $this->assertEquals('Lorem ipsum...', $article->getText());
         $this->assertEquals(true, $article->isState());
         $this->assertEquals(1, $article->getAuthor()->getId());
+        $this->assertEquals($date, $article->getCreated());
+        $this->assertEquals($date, $article->getUpdated());
     }
 
     public function testDeleteArticle(): void

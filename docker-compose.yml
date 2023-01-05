@@ -19,8 +19,11 @@ services:
       BDD_DATABASE: ${MYSQL_DATABASE:-app}
     volumes:
       - ./:/var/www/html:rw
-    ports:
-      - 80:80
+    labels:
+      - "traefik.http.routers.app1.rule=Host(`test-docker-symfony.traefik.me`)"
+      - "traefik.http.routers.app1-tls.tls.domains[0].main=test-docker-symfony.traefik.me"
+      - "traefik.http.routers.app1-tls.tls.domains[0].sans=test-docker-symfony-*.traefik.me"
+      - "traefik.http.routers.app1.tls=true"
     links:
       - mysql
       - redis
@@ -71,3 +74,31 @@ services:
     container_name: test-redis
     ports:
       - 6379:6379
+
+  traefik:
+    image: traefik:v2.0.2
+    container_name: test-traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - 8081:8080
+    labels:
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+    volumes:
+      - ./tools/docker/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ./tools/docker/traefik/tls.yml:/etc/traefik/tls.yml
+      - /var/run/docker.sock:/var/run/docker.sock
+      - certs:/etc/ssl/traefik
+
+  reverse-proxy-https-helper:
+    image: alpine
+    container_name: test-reverse-proxy
+    command: sh -c "cd /etc/ssl/traefik
+      && wget traefik.me/cert.pem -O cert.pem
+      && wget traefik.me/privkey.pem -O privkey.pem"
+    volumes:
+      - certs:/etc/ssl/traefik
+
+volumes:
+  certs:
