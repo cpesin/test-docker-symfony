@@ -36,4 +36,4 @@ jobs:
     #   run: var/db/app_test.db
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      run: make phpunit
+      run: bin/phpunit
