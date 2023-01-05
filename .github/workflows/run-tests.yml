@@ -17,6 +17,7 @@ jobs:
     - uses: shivammathur/setup-php@v2
       with:
         php-version: '8.1'
+        tools: symfony-cli
     
     - uses: actions/checkout@v3
 
@@ -48,4 +49,4 @@ jobs:
       run: vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php
       
     - name: Execute Symfony security check
-      run: vendor/bin/phpstan analyse
+      run: symfony check:security
