@@ -40,3 +40,12 @@ jobs:
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: bin/phpunit
+
+    - name: Execute tests via PHPStan
+      run: vendor/bin/phpstan analyse
+
+    - name: Execute tests via PHP-CS
+      run: vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php
+      
+    - name: Execute Symfony security check
+      run: vendor/bin/phpstan analyse
