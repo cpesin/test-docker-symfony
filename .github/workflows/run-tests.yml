@@ -1,0 +1,47 @@
+name: Run tests
+
+on: [workflow_dispatch, push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  symfony-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        tools: symfony-cli
+    
+    - uses: actions/checkout@v3
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --prefer-dist
+
+    - name: Create Database
+      run: |
+        mkdir -p var/db
+        touch var/db/app_test.db
+        bin/console doctrine:schema:update --env=test --force --no-interaction
+
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      run: bin/phpunit
+
+    - name: Execute tests via PHPStan
+      run: vendor/bin/phpstan analyse
+
+    - name: Execute tests via PHP-CS
+      run: vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php
+      
+    - name: Execute Symfony security check
+      run: symfony check:security
