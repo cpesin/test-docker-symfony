@@ -36,6 +36,7 @@ jobs:
       run: |
         mkdir -p var/db
         touch var/db/app_test.db
+        chmod +w var/db/app_test.db
         bin/console doctrine:migration:migrate --env=test -q
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
