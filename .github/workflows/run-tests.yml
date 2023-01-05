@@ -35,5 +35,10 @@ jobs:
     # - name: Create Database
     #   run: var/db/app_test.db
 
+    - name: check
+      run: | 
+        ls -alh
+        ls -alh ./var/db
+
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: bin/phpunit
