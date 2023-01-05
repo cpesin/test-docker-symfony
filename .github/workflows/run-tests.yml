@@ -1,11 +1,6 @@
 name: Run tests
 
-on:
-  workflow_dispatch:
-  push:
-    #branches: [ "main" ]
-  pull_request:
-    #branches: [ "main" ]
+on: [workflow_dispatch, push, pull_request]
 
 permissions:
   contents: read
