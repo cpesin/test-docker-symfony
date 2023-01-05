@@ -32,8 +32,8 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-    - name: Create Database
-      run: var/db/app_test.db
+    # - name: Create Database
+    #   run: var/db/app_test.db
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: make phpunit
