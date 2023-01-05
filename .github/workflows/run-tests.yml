@@ -32,8 +32,10 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-    # - name: Create Database
-    #   run: var/db/app_test.db
+    - name: Create Database
+      run: |
+        mkdir -p var/db
+        touch var/db/app_test.db
 
     - name: check
       run: | 
