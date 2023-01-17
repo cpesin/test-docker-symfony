@@ -33,12 +33,13 @@ jobs:
   scan_docker_image:
     name: Scan docker image vulnerability
     runs-on: ubuntu-latest
+    needs: push_to_registry
     steps:
       - name: Scan Docker image
         uses: aquasecurity/trivy-action@master
         continue-on-error: true 
         with:
-          image-ref: 'christophepesin/test-server:${{ env.RELEASE_VERSION }}'
+          image-ref: 'docker.io/christophepesin/test-server:${{ env.RELEASE_VERSION }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
