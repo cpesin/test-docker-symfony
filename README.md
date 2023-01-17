@@ -3,6 +3,7 @@ A simple project to test Docker, Symfony and other stuff...
 
 ![GitHub](https://img.shields.io/github/license/cpesin/test-docker-symfony)
 ![GitHub last commit](https://img.shields.io/github/last-commit/cpesin/test-docker-symfony)
+![Publish Docker image](https://github.com/cpesin/test-docker-symfony/actions/workflows/build-docker-image.yml/badge.svg)
 
 ## Features
 
