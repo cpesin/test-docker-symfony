@@ -27,8 +27,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker-compose -f docker-compose.yml build server
-          
+          docker-compose -f docker-compose.yml --no-cache build server
+          docker-compose push
 
       # - name: Build and push Docker image
       #   uses: docker/build-push-action@v3
