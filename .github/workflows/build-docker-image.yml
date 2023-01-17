@@ -29,3 +29,18 @@ jobs:
         run: |
           docker-compose -f docker-compose.yml build --no-cache server
           docker-compose push server
+
+  scan_docker_image:
+    name: Scan docker image vulnerability
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scan Docker image
+        uses: aquasecurity/trivy-action@master
+        continue-on-error: true 
+        with:
+          image-ref: 'christophepesin/test-server:${{ env.RELEASE_VERSION }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
