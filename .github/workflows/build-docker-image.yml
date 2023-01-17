@@ -29,10 +29,3 @@ jobs:
         run: |
           docker-compose -f docker-compose.yml build --no-cache server
           docker-compose push server
-
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@v3
-      #   with:
-      #     context: .
-      #     push: true
-      #     tags: christophepesin/test-server:v${{ env.RELEASE_VERSION }}
