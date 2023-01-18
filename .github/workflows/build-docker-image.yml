@@ -29,12 +29,12 @@ jobs:
         run: |
           docker-compose -f docker-compose.yml build --no-cache server
           docker-compose push server
-          
+
       - name: Scan Docker image
         uses: aquasecurity/trivy-action@master
         continue-on-error: true 
         with:
-          image-ref: 'docker.io/christophepesin/test-server:${{ env.RELEASE_VERSION }}'
+          image-ref: 'docker.io/christophepesin/test-server:v${{ env.RELEASE_VERSION }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
