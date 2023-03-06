@@ -1,27 +1,55 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Repository;
 
 use App\Entity\Author;
 use App\Repository\AuthorRepository;
 use App\Repository\ArticleRepository;
-use App\Entity\Article;
+use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 class AuthorsTest extends KernelTestCase
 {
     use RefreshDatabaseTrait;
 
-    /** @var AbstractDatabaseTool */
-    protected $databaseTool;
+    /**
+     * [Description for $databaseTool]
+     *
+     * @var AbstractDatabaseTool
+     */
+    private $databaseTool;
 
-    protected $container;
+    /**
+     * [Description for $container]
+     *
+     * @var ContainerInterface
+     */
+    private $container;
 
-    protected $authorRepository;
+    /**
+     * [Description for $authorRepository]
+     *
+     * @var AuthorRepository
+     */
+    private $authorRepository;
 
+    /**
+     * [Description for $articleRepository]
+     *
+     * @var ArticleRepository
+     */
+    private $articleRepository;
+
+    /**
+     * [Description for setUp]
+     *
+     * @return void
+     * 
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -37,12 +65,24 @@ class AuthorsTest extends KernelTestCase
         ]);
     }
 
+    /**
+     * [Description for testCount]
+     *
+     * @return void
+     * 
+     */
     public function testCount(): void
     {
         $authors = $this->authorRepository->count([]);
         $this->assertEquals(8, $authors);
     }
 
+    /**
+     * [Description for testAddAuthor]
+     *
+     * @return void
+     * 
+     */
     public function testAddAuthor(): void
     {
         $authors = $this->authorRepository->count([]);
@@ -64,6 +104,12 @@ class AuthorsTest extends KernelTestCase
         $this->assertEquals('email1@test.com', $author->getEmail());
     }
 
+    /**
+     * [Description for testAddArticleToAuthor]
+     *
+     * @return void
+     * 
+     */
     public function testAddArticleToAuthor(): void
     {
         $article = $this->articleRepository->findOneBy(
@@ -82,6 +128,12 @@ class AuthorsTest extends KernelTestCase
         $this->assertCount(1, $author->getArticles());
     }
 
+    /**
+     * [Description for testRemoveArticleToAuthor]
+     *
+     * @return void
+     * 
+     */
     public function testRemoveArticleToAuthor(): void
     {
         $article = $this->articleRepository->findOneBy(
@@ -102,6 +154,12 @@ class AuthorsTest extends KernelTestCase
         $this->assertCount(0, $author->getArticles());
     }
 
+    /**
+     * [Description for testDeleteAuthor]
+     *
+     * @return void
+     * 
+     */
     public function testDeleteAuthor(): void
     {
         $authors = $this->authorRepository->count([]);
@@ -119,6 +177,12 @@ class AuthorsTest extends KernelTestCase
         $this->assertEquals(0, $author);
     }
     
+    /**
+     * [Description for tearDown]
+     *
+     * @return void
+     * 
+     */
     protected function tearDown(): void
     {
         parent::tearDown();

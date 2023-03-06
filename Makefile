@@ -65,4 +65,4 @@ phpcs: ## Run php-cs-fixer with dry run
 	@$(SYMFONY) 'vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php'
 
 phpstan: ## RUN phpstan
-	@$(SYMFONY) 'vendor/bin/phpstan analyse'
+	@$(SYMFONY) 'vendor/bin/phpstan analyse --xdebug'

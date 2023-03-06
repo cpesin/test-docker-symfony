@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 
-Class indexControllerTest extends WebTestCase
+Class articlesControllerTest extends WebTestCase
 { 
     use RefreshDatabaseTrait;
 
@@ -54,15 +54,15 @@ Class indexControllerTest extends WebTestCase
     }
     
     /**
-     * [Description for testHomePage]
+     * [Description for testArticlesPage]
      *
      * @return void
      * 
      */
-    public function testHomePage() :void
+    public function testArticlesPage(): void
     {
-        $this->client->request('GET', '/');
+        $this->client->request('GET', '/articles');
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('div.card-header', 'Dernier article');
+        $this->assertSelectorTextContains('h2', 'Liste des articles');
     }
 }
