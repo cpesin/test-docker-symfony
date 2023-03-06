@@ -30,7 +30,7 @@ class ArticleRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->persist($entity);
 
-        if ($flush) {
+        if (true === $flush) {
             $this->getEntityManager()->flush();
         }
     }
@@ -42,7 +42,7 @@ class ArticleRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->remove($entity);
 
-        if ($flush) {
+        if (true === $flush) {
             $this->getEntityManager()->flush();
         }
     }
