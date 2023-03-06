@@ -1,24 +1,55 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Repository;
 
 use App\Entity\Article;
-use App\Repository\ArticleRepository;
 use App\Repository\AuthorRepository;
+use App\Repository\ArticleRepository;
+use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 class ArticlesTest extends KernelTestCase
 {    
     use RefreshDatabaseTrait;
 
-    /** @var AbstractDatabaseTool */
-    protected $databaseTool;
+    /**
+     * [Description for $databaseTool]
+     *
+     * @var AbstractDatabaseTool
+     */
+    private $databaseTool;
 
-    protected $container;
+    /**
+     * [Description for $container]
+     *
+     * @var ContainerInterface
+     */
+    private $container;
 
+    /**
+     * [Description for $authorRepository]
+     *
+     * @var AuthorRepository
+     */
+    private $authorRepository;
+
+    /**
+     * [Description for $articleRepository]
+     *
+     * @var ArticleRepository
+     */
+    private $articleRepository;
+
+    /**
+     * [Description for setUp]
+     *
+     * @return void
+     * 
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -34,12 +65,24 @@ class ArticlesTest extends KernelTestCase
         ]);
     }
 
+    /**
+     * [Description for testCount]
+     *
+     * @return void
+     * 
+     */
     public function testCount(): void
     {
         $articles = $this->container->get(ArticleRepository::class)->count([]);
         $this->assertEquals(8, $articles);
     }
     
+    /**
+     * [Description for testAddArticle]
+     *
+     * @return void
+     * 
+     */
     public function testAddArticle(): void
     {
         $articles = $this->articleRepository->count([]);
@@ -71,6 +114,12 @@ class ArticlesTest extends KernelTestCase
         $this->assertEquals($date, $article->getUpdated());
     }
 
+    /**
+     * [Description for testDeleteArticle]
+     *
+     * @return void
+     * 
+     */
     public function testDeleteArticle(): void
     {
         $articles = $this->articleRepository->count([]);
@@ -88,6 +137,12 @@ class ArticlesTest extends KernelTestCase
         $this->assertEquals(0, $article);
     }
 
+    /**
+     * [Description for tearDown]
+     *
+     * @return void
+     * 
+     */
     protected function tearDown(): void
     {
         parent::tearDown();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Article;
@@ -21,6 +23,9 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    /**
+     * [Description for save].
+     */
     public function save(Article $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +35,9 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * [Description for remove].
+     */
     public function remove(Article $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
