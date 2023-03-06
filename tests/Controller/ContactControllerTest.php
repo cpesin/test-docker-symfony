@@ -96,4 +96,16 @@ Class contactControllerTest extends WebTestCase
         $this->client->followRedirect();
         $this->assertSelectorTextContains('div.alert-success', 'Merci pour votre message');
     }
+
+    /**
+     * [Description for tearDown]
+     *
+     * @return void
+     * 
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        unset($this->container, $this->client, $this->databaseTool, $this->crawler);
+    }
 }

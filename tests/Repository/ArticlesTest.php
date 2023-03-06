@@ -146,6 +146,6 @@ class ArticlesTest extends KernelTestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        unset($this->databaseTool);
+        unset($this->container, $this->authorRepository, $this->articleRepository, $this->databaseTool);
     }
 }

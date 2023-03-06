@@ -65,4 +65,16 @@ Class articlesControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h2', 'Liste des articles');
     }
+
+    /**
+     * [Description for tearDown]
+     *
+     * @return void
+     * 
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        unset($this->container, $this->client, $this->databaseTool);
+    }
 }

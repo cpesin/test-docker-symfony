@@ -65,4 +65,16 @@ Class indexControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('div.card-header', 'Dernier article');
     }
+
+    /**
+     * [Description for tearDown]
+     *
+     * @return void
+     * 
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        unset($this->container, $this->client, $this->databaseTool);
+    }
 }
