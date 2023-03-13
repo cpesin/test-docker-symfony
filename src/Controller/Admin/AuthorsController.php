@@ -74,7 +74,7 @@ class AuthorsController extends AbstractController
     /**
      * [Description for delete].
      */
-    #[Route('/admin/authors/supprimer/{id}', name: 'admin_authors_delete', methods: ['POST'])]
+    #[Route('/admin/auteurs/supprimer/{id}', name: 'admin_authors_delete', methods: ['POST'])]
     public function delete(Request $request, Author $author, AuthorRepository $authorRepository): Response
     {
         /** @var string|null */
