@@ -7,15 +7,11 @@
         <h1 class="h2">Modification de l'article</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+              <a href="{{ path('admin_index') }}"><< Revenir à la liste des articles</a>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar" class="align-text-bottom"></span>
-            This week
-          </button>
         </div>
       </div>
 
-      # TODO : Add edit form
+      {{ include('admin/_partials/_article_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+      {{ include('admin/_partials/_article_delete_form.html.twig') }}
 {% endblock %}

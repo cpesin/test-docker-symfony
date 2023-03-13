@@ -9,14 +9,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link{% if app.request.get('_route') == 'admin_authors' %} active{% endif %}" href="{{ path('admin_authors') }}">
-              <span data-feather="file" class="align-text-bottom"></span>
+            <a class="nav-link{% if app.request.get('_route') in ['admin_authors','admin_authors_new','admin_authors_edit'] %} active{% endif %}" href="{{ path('admin_authors') }}">
+              <span data-feather="authors" class="align-text-bottom"></span>
               Auteurs
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link{% if app.request.get('_route') == 'admin_articles' %} active{% endif %}" href="{{ path('admin_articles') }}">
-              <span data-feather="shopping-cart" class="align-text-bottom"></span>
+            <a class="nav-link{% if app.request.get('_route') in ['admin_articles','admin_articles_new','admin_articles_edit'] %} active{% endif %}" href="{{ path('admin_articles') }}">
+              <span data-feather="articles" class="align-text-bottom"></span>
               Articles
             </a>
         </ul>

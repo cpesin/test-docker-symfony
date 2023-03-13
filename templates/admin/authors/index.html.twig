@@ -1,19 +1,14 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Auteurs{% endblock %}
+{% block title %}Gestion des auteurs{% endblock %}
 
 {% block body %}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Gestion des auteurs</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+              <a href="{{ path('admin_authors_new') }}" class="link-info">+ Ajouter un auteur</a>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar" class="align-text-bottom"></span>
-            This week
-          </button>
         </div>
       </div>
 
@@ -37,8 +32,13 @@
               <td>{{ author.lastname }}</td>
               <td>{{ author.email }}</td>
               <td>
-                <a href="{{ path('admin_author_edit', {id: author.id}) }}" class="btn btn-success">Modifier</a>
+                {{ include('admin/_partials/_author_delete_form.html.twig') }}
+                <a href="{{ path('admin_authors_edit', {id: author.id}) }}" class="btn btn-success">Modifier</a>
               </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">Aucun enregistrement</td>
             </tr>
             {% endfor %}
           </tbody>
