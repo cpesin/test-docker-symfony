@@ -1,0 +1,17 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modification d'un auteur{% endblock %}
+
+{% block body %}    
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Modification de l'auteur : {{ author.firstname ~ ' ' ~ author.lastname }}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+              <a href="{{ path('admin_authors') }}" class="link-info"><< Revenir à la liste des auteurs</a>
+          </div>
+        </div>
+      </div>
+
+      {{ include('admin/_partials/_author_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+      {{ include('admin/_partials/_author_delete_form.html.twig') }}
+{% endblock %}

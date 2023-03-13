@@ -14,10 +14,8 @@ class Mailer
 {
     /**
      * [Description for $mailer].
-     *
-     * @var MailerInterface
      */
-    private $mailer;
+    private MailerInterface $mailer;
 
     /**
      * [Description for __construct].
@@ -29,10 +27,8 @@ class Mailer
 
     /**
      * [Description for sendEmail].
-     *
-     * @param mixed $data
      */
-    public function sendEmail($data): int
+    public function sendEmail(mixed $data): int
     {
         $email = (new Email())
             ->from('hello@example.com')

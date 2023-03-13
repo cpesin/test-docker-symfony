@@ -7,18 +7,18 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link{% if app.request.get('_route') == 'app_index' %} active{% endif %}" href="/">Accueil
+          <a class="nav-link{% if app.request.get('_route') == 'app_index' %} active{% endif %}" href="{{ path('app_index') }}">Accueil
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link{% if app.request.get('_route') == 'app_articles' %} active{% endif %}" href="articles">Articles</a>
+          <a class="nav-link{% if app.request.get('_route') == 'app_articles' %} active{% endif %}" href="{{ path('app_articles') }}">Articles</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link{% if app.request.get('_route') == 'app_author' %} active{% endif %}" href="auteurs">Auteurs</a>
+          <a class="nav-link{% if app.request.get('_route') == 'app_authors' %} active{% endif %}" href="{{ path('app_authors') }}">Auteurs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}" href="contact">Nous contacter</a>
+          <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}" href="{{ path('app_contact') }}">Nous contacter</a>
         </li>
       </ul>
       <form class="d-flex">

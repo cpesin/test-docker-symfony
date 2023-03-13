@@ -158,4 +158,12 @@ class Author
 
         return $this;
     }
+
+    /**
+     * [Description for __toString].
+     */
+    public function __toString(): string
+    {
+        return $this->getFirstname().' '.$this->getLastname();
+    }
 }
