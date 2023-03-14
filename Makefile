@@ -40,6 +40,8 @@ composer_install: composer.lock ## run composer install
 	@$(SYMFONY) 'composer install'
 
 install: composer_install ## Alias of composer_install / composer_update
+	@$(SYMFONY) 'npm install'
+	@$(SYMFONY) 'npm run build'
 
 database_create: ## Create database define in .env file
 	@$(SYMFONY) 'bin/console doctrine:database:create --if-not-exists --no-interaction'
