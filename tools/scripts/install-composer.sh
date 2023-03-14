@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION="2.4.4"
+VERSION="2.5.4"
 
 INSTALL_DIR="/usr/local/bin"
 EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"

@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   server:
-    image: ${DOCKER_REGISTRY}/test-server:v1.0.0
+    image: ${DOCKER_REGISTRY}/test-server:v1.1.0
     build:
       context: .
       dockerfile: ./tools/docker/php/Dockerfile

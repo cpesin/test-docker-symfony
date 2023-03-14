@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libwebp-dev \
     nano \
+    npm \
     pkg-config \
     sqlite3 \
     supervisor \
