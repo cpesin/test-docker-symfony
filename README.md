@@ -16,6 +16,7 @@ You can use this project to play with :
 * Mailcatcher
 * Traefik
 * Bootstrap
+* Webpack Encore
 
 ## Requirements
 
@@ -31,7 +32,7 @@ Clone the project :
 Run containers :
 `make up`
 
-Install Symfony bundles :
+Install Symfony bundles and Webpack Encore :
 `make install`
 
 Create the database : 
@@ -51,6 +52,9 @@ Stop docker's containers with `make stop`.
 
 Website :
 `https://test-docker-symfony.traefik.me/`
+
+Website's admin :
+`https://test-docker-symfony.traefik.me/admin`
 
 PHPMyAdmin : 
 `http://localhost:8090`
