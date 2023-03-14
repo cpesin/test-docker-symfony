@@ -65,6 +65,14 @@ COPY ./tools/docker/config/default-vhost.conf /etc/apache2/sites-available/
 RUN a2dissite 000-default.conf \
     && a2ensite default-vhost.conf 
 
+# Update Node
+RUN npm install -g n \
+    && n lts \
+    && n prune
+
+# Update NPM
+RUN npm install -g npm@latest
+
 # Symfony CLI
 RUN wget https://get.symfony.com/cli/installer -O - | bash \
     && chmod +x /root/.symfony5/bin/symfony \
