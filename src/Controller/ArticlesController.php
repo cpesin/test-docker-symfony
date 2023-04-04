@@ -33,7 +33,7 @@ class ArticlesController extends AbstractController
     #[Route('/article/{id}', name: 'app_article', requirements: ['id' => '\d+'])]
     public function article(ArticleRepository $articleRepository, int $id): Response
     {
-        $article = $articleRepository->findOneById($id);
+        $article = $articleRepository->find($id);
 
         return $this->render('articles/article.html.twig', [
             'article' => $article,
