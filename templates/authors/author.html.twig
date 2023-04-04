@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ author.firstname }} {{ author.lastname }}{% endblock %}
+
+{% block body %}
+    <h2>Liste des articles de {{ author.firstname }} {{ author.lastname }}</h2>
+    <div class="list">
+        {% for article in author.articles %}
+        <div class="article">
+            <h3><a href="{{ path('app_article', { 'id': article.id }) }}">{{ article.title }}</a></h3>
+            <p>Créé le {{ article.created | format_datetime(locale='fr') }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

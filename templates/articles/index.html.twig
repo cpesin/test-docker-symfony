@@ -7,7 +7,7 @@
     <div class="list">
         {% for article in articles %}
         <div class="article">
-            <h3><a href="article/{{ article.id }}">{{ article.title }}</a></h3>
+            <h3><a href="{{ path('app_article', { 'id': article.id }) }}">{{ article.title }}</a></h3>
             <p>Créé le {{ article.created | format_datetime(locale='fr') }} par {{ article.author.firstname }} {{ article.author.lastname }}</p>
         </div>
         {% endfor %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block body %}
+    <h2>{{ article.title }}</h2>
+    <div class="article">
+        <p>{{ article.text }} ...</p>
+        <p>Créé le {{ article.created | format_datetime(locale='fr') }} par {{ article.author.firstname }} {{ article.author.lastname }}</p>
+    </div>
+{% endblock %}

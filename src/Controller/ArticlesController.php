@@ -29,4 +29,14 @@ class ArticlesController extends AbstractController
             'articles' => $articles,
         ]);
     }
+
+    #[Route('/article/{id}', name: 'app_article', requirements: ['id' => '\d+'])]
+    public function article(ArticleRepository $articleRepository, int $id): Response
+    {
+        $article = $articleRepository->find($id);
+
+        return $this->render('articles/article.html.twig', [
+            'article' => $article,
+        ]);
+    }
 }
