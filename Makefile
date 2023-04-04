@@ -33,7 +33,7 @@ redis: up ## Run bash in redis container
 	@$(DOCKER_EXEC) $(REDIS) /bin/bash
 
 ## —— Symfony 🎶 ———————————————————————————————————————————————————————————————
-composer_update: composer.jon ## Run composer update
+composer_update: composer.json ## Run composer update
 	@$(SYMFONY) 'composer update'
 
 composer_install: composer.lock ## run composer install
@@ -67,4 +67,4 @@ phpcs: ## Run php-cs-fixer with dry run
 	@$(SYMFONY) 'vendor/bin/php-cs-fixer fix src --dry-run --diff --config=.php-cs-fixer.dist.php'
 
 phpstan: ## RUN phpstan
-	@$(SYMFONY) 'vendor/bin/phpstan analyse --xdebug'
+	@$(SYMFONY) 'vendor/bin/phpstan analyse'
