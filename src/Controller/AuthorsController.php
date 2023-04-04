@@ -24,4 +24,14 @@ class AuthorsController extends AbstractController
             'authors' => $authorRepository->findAll(),
         ]);
     }
+
+    #[Route('/auteur/{id}', name: 'app_author', requirements: ['id' => '\d+'])]
+    public function article(AuthorRepository $authorRepository, int $id): Response
+    {
+        $author = $authorRepository->findOneById($id);
+
+        return $this->render('authors/author.html.twig', [
+            'author' => $author,
+        ]);
+    }
 }
