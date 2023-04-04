@@ -33,7 +33,7 @@ redis: up ## Run bash in redis container
 	@$(DOCKER_EXEC) $(REDIS) /bin/bash
 
 ## —— Symfony 🎶 ———————————————————————————————————————————————————————————————
-composer_update: composer.jon ## Run composer update
+composer_update: composer.json ## Run composer update
 	@$(SYMFONY) 'composer update'
 
 composer_install: composer.lock ## run composer install
