@@ -41,6 +41,7 @@ composer_install: composer.lock ## run composer install
 
 install: composer_install ## Alias of composer_install / composer_update
 	@$(SYMFONY) 'npm install'
+	@$(SYMFONY) 'npm i bootstrap'
 	@$(SYMFONY) 'npm run build'
 
 database_create: ## Create database define in .env file
@@ -52,6 +53,9 @@ schema_update: ## Create database schema define in app
 
 load_fixtures: ## Load database's fixtures
 	@$(SYMFONY) 'bin/console doctrine:fixtures:load'
+
+npm_watch: 
+	@$(SYMFONY) 'npm run watch'
 
 ## —— Tests ✅ ———————————————————————————————————————————————————————————————
 phpunit: ## Run phpunit
