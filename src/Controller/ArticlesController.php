@@ -30,7 +30,7 @@ class ArticlesController extends AbstractController
         ]);
     }
 
-    #[Route('/article/{id}', name: 'app_article', requirements: ['id' => '\d+'])]
+    #[Route('/article-{id}', name: 'app_article', requirements: ['id' => '\d+'])]
     public function article(ArticleRepository $articleRepository, int $id): Response
     {
         $article = $articleRepository->find($id);

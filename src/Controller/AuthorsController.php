@@ -25,7 +25,7 @@ class AuthorsController extends AbstractController
         ]);
     }
 
-    #[Route('/auteur/{id}', name: 'app_author', requirements: ['id' => '\d+'])]
+    #[Route('/auteur-{id}', name: 'app_author', requirements: ['id' => '\d+'])]
     public function article(AuthorRepository $authorRepository, int $id): Response
     {
         $author = $authorRepository->find($id);
