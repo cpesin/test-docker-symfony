@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Service;
+namespace App\Tests\Unit\Service;
 
 use App\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 /**
  * [Description MailerTest]
  */
-class MailerTest extends KernelTestCase
+class MailerServiceTest extends KernelTestCase
 {
     /**
      * [Description for $container]
