@@ -42,9 +42,11 @@ class ArticleType extends AbstractType
             ])
             ->add('created', DateTimeType::class, [
                 'label' => 'Date de création',
+                'widget' => 'single_text',
             ])
             ->add('updated', DateTimeType::class, [
                 'label' => 'Date de modification',
+                'widget' => 'single_text',
             ])
             ->add('author', null, [
                 'label' => 'Auteur',
