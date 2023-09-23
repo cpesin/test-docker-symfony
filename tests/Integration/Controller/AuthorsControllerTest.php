@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 
-Class authorsControllerTest extends WebTestCase
+Class AuthorsControllerTest extends WebTestCase
 { 
     use RefreshDatabaseTrait;
 

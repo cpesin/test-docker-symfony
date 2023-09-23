@@ -1,8 +1,8 @@
 grumphp:
     tasks: { 
-        phpcsfixer: null, 
-        phpstan: null, 
-        phpunit: null,
+        # phpcsfixer: null, 
+        # phpstan: null, 
+        # phpunit: null,
         securitychecker_symfony: null 
     }
     ascii:
