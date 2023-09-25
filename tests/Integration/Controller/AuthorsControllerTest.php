@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Controller;
+namespace App\Tests\Integration\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 
-Class articlesControllerTest extends WebTestCase
+Class AuthorsControllerTest extends WebTestCase
 { 
     use RefreshDatabaseTrait;
 
@@ -54,16 +54,16 @@ Class articlesControllerTest extends WebTestCase
     }
     
     /**
-     * [Description for testArticlesPage]
+     * [Description for testAuthorsPage]
      *
      * @return void
      * 
      */
-    public function testArticlesPage(): void
+    public function testAuthorsPage() :void
     {
-        $this->client->request('GET', '/articles');
+        $this->client->request('GET', '/auteurs');
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h2', 'Liste des articles');
+        $this->assertSelectorTextContains('h2', 'Liste des auteurs');
     }
 
     /**

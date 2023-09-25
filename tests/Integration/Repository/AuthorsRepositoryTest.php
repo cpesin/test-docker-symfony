@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Repository;
+namespace App\Tests\Integration\Repository;
 
 use App\Entity\Author;
 use App\Repository\AuthorRepository;
@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 
-class AuthorsTest extends KernelTestCase
+class AuthorsRepositoryTest extends KernelTestCase
 {
     use RefreshDatabaseTrait;
 

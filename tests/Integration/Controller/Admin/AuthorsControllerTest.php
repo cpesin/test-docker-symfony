@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Test\Controller;
+namespace App\Tests\Integration\Controller\Admin;
 
-use App\Entity\Article;
-use App\Repository\ArticleRepository;
+use App\Entity\Author;
+use App\Repository\AuthorRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ArticlesControllerTest extends WebTestCase
+class AuthorsControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
-    private ArticleRepository $repository;
-    private string $path = '/admin/articles';
+    private AuthorRepository $repository;
+    private string $path = '/admin/auteurs';
 
     protected function setUp(): void
     {
         $this->client = static::createClient();
-        $this->repository = static::getContainer()->get('doctrine')->getRepository(Article::class);
+        $this->repository = static::getContainer()->get('doctrine')->getRepository(Author::class);
 
         foreach ($this->repository->findAll() as $object) {
             $this->repository->remove($object, true);
@@ -28,7 +28,7 @@ class ArticlesControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', $this->path);
 
         self::assertResponseStatusCodeSame(200);
-        self::assertPageTitleContains('Gestion des articles');
+        self::assertPageTitleContains('Gestion des auteurs');
 
         // Use the $crawler to perform additional assertions e.g.
         // self::assertSame('Some text on the page', $crawler->filter('.p')->first());
