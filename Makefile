@@ -13,7 +13,7 @@ SYMFONY = @$(DOCKER_EXEC) $(SERVER) /bin/bash -c
 help: ## Commands list
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
-install: composer_install check_permissions npm_install database_create migrations_run npm_build fixtures_load ## Install the project
+install: composer_install check_permissions npm_install npm_install_bootstrap database_create migrations_run npm_build fixtures_load ## Install the project
 
 tests: phpcs phpstan phpunit ## Run all tests
 
@@ -40,7 +40,7 @@ bash: up ## Run bash in server container
 redis: up ## Run bash in redis container
 	@$(DOCKER_EXEC) $(REDIS) /bin/bash
 
-## —— Symfony 🎶 ———————————————————————————————————————————————————————————————
+## —— Symfony 🎶 ——————————————————————————————————————————————————————————————— 
 composer_install: composer.lock ## run composer install
 	@$(SYMFONY) 'composer install'
 
@@ -85,6 +85,9 @@ doctrine_clear_sl_cache: ## Clear doctrine caches second level
 	@$(SYMFONY) 'bin/console doctrine:cache:clear-query-region'
 
 npm_install: ## Install npm
+	@$(SYMFONY) 'npm install'
+
+npm_install_bootstrap: ## Install npm bootstrap
 	@$(SYMFONY) 'npm install'
 
 npm_build: ## Build assets

@@ -6,16 +6,12 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-// import './../styles/bootstrap.min.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/dashboard.scss';
-import './styles/app.scss';
+import './styles/admin.scss';
 
 // start the Stimulus application
-import './../bootstrap';
-
-// Bootstrap
-import './../bootstrap.bundle.min';
+import '../bootstrap';
 
 // Other scripts
 import './dashboard';
