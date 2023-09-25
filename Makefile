@@ -41,7 +41,7 @@ composer_install: composer.lock ## run composer install
 
 install: composer_install ## Alias of composer_install / composer_update
 	@$(SYMFONY) 'npm install'
-	@$(SYMFONY) 'npm i bootstrap'
+	@$(SYMFONY) 'npm install bootstrap'
 	@$(SYMFONY) 'npm run build'
 
 database_create: ## Create database define in .env file

@@ -15,9 +15,5 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
-// Bootstrap
-// import './bootstrap.min';
-// import './bootstrap.bundle.min';
-
 // Other scripts
 import './scripts';
