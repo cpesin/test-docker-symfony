@@ -4,19 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Service\Mailer;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormInterface;
+use App\Form\ContactType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * [Description ContactController].
@@ -29,7 +23,9 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
     public function index(Request $request, Mailer $mailer): Response
     {
-        $form = $this->getform();
+        $contact = new Contact();
+
+        $form = $this->createForm(ContactType::class, $contact);
 
         $form->handleRequest($request);
 
@@ -53,59 +49,5 @@ class ContactController extends AbstractController
     public function send(Request $request): Response
     {
         return $this->render('contact/send.html.twig');
-    }
-
-    /**
-     * [Description for getForm].
-     */
-    private function getForm(): FormInterface
-    {
-        $form = $this->createFormBuilder()
-            ->add('name', TextType::class, [
-                'label' => 'Nom',
-                'attr' => [
-                    'placeholder' => 'Nom',
-                ],
-                'row_attr' => [
-                    'class' => 'form-floating',
-                ],
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(['min' => 3]),
-                ],
-            ])
-            ->add('email', EmailType::class, [
-                'label' => 'Email',
-                'attr' => [
-                    'placeholder' => 'Email',
-                ],
-                'row_attr' => [
-                    'class' => 'form-floating',
-                ],
-                'constraints' => [
-                    new Email(),
-                    new NotBlank(),
-                    new Length(['min' => 10]),
-                ],
-            ])
-            ->add('message', TextareaType::class, [
-                'label' => 'Message',
-                'attr' => [
-                    'placeholder' => 'Message',
-                ],
-                'row_attr' => [
-                    'class' => 'form-floating',
-                ],
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(['min' => 10]),
-                ],
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Envoyer',
-            ])
-            ->getForm();
-
-        return $form;
     }
 }
