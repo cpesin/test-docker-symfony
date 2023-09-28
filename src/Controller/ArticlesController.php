@@ -17,7 +17,7 @@ class ArticlesController extends AbstractController
     /**
      * [Description for index].
      */
-    #[Route('/articles', name: 'app_articles')]
+    #[Route('/articles', name: 'app_articles', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
         $articles = $articleRepository->findBy(
@@ -30,7 +30,7 @@ class ArticlesController extends AbstractController
         ]);
     }
 
-    #[Route('/article-{id}', name: 'app_article', requirements: ['id' => '\d+'])]
+    #[Route('/article-{id}', name: 'app_article', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function article(ArticleRepository $articleRepository, int $id): Response
     {
         $article = $articleRepository->find($id);

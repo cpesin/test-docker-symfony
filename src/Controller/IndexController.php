@@ -17,7 +17,7 @@ class IndexController extends AbstractController
     /**
      * [Description for index].
      */
-    #[Route('/', name: 'app_index')]
+    #[Route('/', name: 'app_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
         $lastArticle = $articleRepository->findOneBy(
