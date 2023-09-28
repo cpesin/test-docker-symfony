@@ -26,7 +26,7 @@ class ContactController extends AbstractController
     /**
      * [Description for index].
      */
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
     public function index(Request $request, Mailer $mailer): Response
     {
         $form = $this->getform();
@@ -49,7 +49,7 @@ class ContactController extends AbstractController
     /**
      * [Description for send].
      */
-    #[ROUTE('/contact/send', name: 'app_contact_send')]
+    #[ROUTE('/contact/send', name: 'app_contact_send', methods: ['GET'])]
     public function send(Request $request): Response
     {
         return $this->render('contact/send.html.twig');

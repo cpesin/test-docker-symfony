@@ -17,7 +17,7 @@ class AuthorsController extends AbstractController
     /**
      * [Description for index].
      */
-    #[Route('/auteurs', name: 'app_authors')]
+    #[Route('/auteurs', name: 'app_authors', methods: ['GET'])]
     public function index(AuthorRepository $authorRepository): Response
     {
         return $this->render('authors/index.html.twig', [
@@ -25,7 +25,7 @@ class AuthorsController extends AbstractController
         ]);
     }
 
-    #[Route('/auteur-{id}', name: 'app_author', requirements: ['id' => '\d+'])]
+    #[Route('/auteur-{id}', name: 'app_author', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function article(AuthorRepository $authorRepository, int $id): Response
     {
         $author = $authorRepository->find($id);
