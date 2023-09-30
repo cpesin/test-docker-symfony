@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace App\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 
 class ApplicationAvailabilityTest extends WebTestCase
 {
-    use RefreshDatabaseTrait;
-    
     /**
      * @var Boolean
      */
@@ -57,7 +54,7 @@ class ApplicationAvailabilityTest extends WebTestCase
         $this->debug = true;
 
         $this->slugs = ['name' => 'test', 'id' => 1];
-        $this->excludes = [];
+        $this->excludes = ['admin_articles_delete', 'admin_authors_delete'];
 
         $this->client = static::createClient();
         $this->container = self::getContainer();

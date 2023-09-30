@@ -9,7 +9,7 @@ A simple project to test Docker, Symfony and other stuff...
 
 You can use this project to play with :
 * Docker
-* Symfony 6
+* Symfony 6.3
 * Mysql / PhpMyAdmin
 * Sqlite / Adminer
 * Redis
@@ -32,17 +32,8 @@ Clone the project :
 Run containers :
 `make up`
 
-Install Symfony bundles and Webpack Encore :
+Install the project :
 `make install`
-
-Create the database : 
-`make database_create`
-
-Create database's tables :
-`make schema_update`
-
-Load fixtures :
-`make load_fixtures`
 
 Use `make bash` to enter in main container (server).
 

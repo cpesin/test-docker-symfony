@@ -7,15 +7,12 @@ namespace App\Tests\Integration\Repository;
 use App\Entity\Article;
 use App\Repository\AuthorRepository;
 use App\Repository\ArticleRepository;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 
 class ArticlesRepositoryTest extends KernelTestCase
-{    
-    use RefreshDatabaseTrait;
-
+{
     /**
      * [Description for $databaseTool]
      *
