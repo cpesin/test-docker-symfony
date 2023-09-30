@@ -28,9 +28,9 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom',
+                'label' => 'Firstname',
                 'attr' => [
-                    'placeholder' => 'prénom',
+                    'placeholder' => 'Firstname',
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
@@ -41,9 +41,9 @@ class ContactType extends AbstractType
                 ],
             ])
             ->add('lastname', TextType::class, [
-                'label' => 'Nom',
+                'label' => 'Lastname',
                 'attr' => [
-                    'placeholder' => 'Nom',
+                    'placeholder' => 'Lastname',
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
@@ -81,7 +81,7 @@ class ContactType extends AbstractType
                 ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Envoyer',
+                'label' => 'Submit',
             ])
         ;
     }
