@@ -1,5 +1,5 @@
 # Base
-FROM php:8.1.12-apache-bullseye
+FROM php:8.2.11-apache-bookworm
 
 # Environment variables
 ENV WEB_FOLDER=/var/www/html
