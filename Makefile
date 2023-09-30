@@ -13,7 +13,7 @@ SYMFONY = @$(DOCKER_EXEC) $(SERVER) /bin/bash -c
 help: ## Commands list
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
-install: composer_install check_permissions npm_install npm_install_bootstrap database_create migrations_run npm_build fixtures_load ## Install the project
+install: composer_install npm_install npm_install_bootstrap database_create migrations_run npm_build fixtures_load ## Install the project
 
 tests: phpcs phpstan phpunit ## Run all tests
 
@@ -70,25 +70,18 @@ schema_update: ## Create database schema define in app
 	@$(SYMFONY) 'bin/console doctrine:schema:update --env=test --force --no-interaction'
 
 fixtures_load: ## Load database's fixtures
-	@$(SYMFONY) 'bin/console doctrine:fixtures:load'
-
-doctrine_clear_all_cache: doctrine_clear_cache doctrine_clear_sl_cache ## Clear all doctrine caches
+	@$(SYMFONY) 'bin/console doctrine:fixtures:load --no-interaction'
 
 doctrine_clear_cache: ## Clear doctrine caches
 	@$(SYMFONY) 'bin/console doctrine:cache:clear-metadata'
 	@$(SYMFONY) 'bin/console doctrine:cache:clear-query'
 	@$(SYMFONY) 'bin/console doctrine:cache:clear-result'
 
-doctrine_clear_sl_cache: ## Clear doctrine caches second level
-	@$(SYMFONY) 'bin/console doctrine:cache:clear-collection-region'
-	@$(SYMFONY) 'bin/console doctrine:cache:clear-entity-region'
-	@$(SYMFONY) 'bin/console doctrine:cache:clear-query-region'
-
 npm_install: ## Install npm
 	@$(SYMFONY) 'npm install'
 
 npm_install_bootstrap: ## Install npm bootstrap
-	@$(SYMFONY) 'npm install'
+	@$(SYMFONY) 'npm install bootstrap'
 
 npm_build: ## Build assets
 	@$(SYMFONY) 'npm run build'
@@ -96,10 +89,6 @@ npm_build: ## Build assets
 npm_watch: 
 	@$(SYMFONY) 'npm run watch'
 	
-check_permissions: ## Check files and forders permissions (dev only)
-	@$(SYMFONY) 'chmod 0777 var/* -R'
-	@$(SYMFONY) 'chmod +x bin/* -R'
-
 ## —— Tests ✅ ———————————————————————————————————————————————————————————————
 phpunit: phpunit_unit phpunit_integration phpunit_functionnal ## Run phpunit
 

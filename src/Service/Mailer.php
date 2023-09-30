@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Entity\Contact;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -28,14 +29,14 @@ class Mailer
     /**
      * [Description for sendEmail].
      */
-    public function sendEmail(mixed $data): int
+    public function sendEmail(Contact $data): int
     {
         $email = (new Email())
             ->from('hello@example.com')
             ->to('email-de-test@test.com')
             ->subject('[test] Time for Symfony Mailer!')
-            ->text('name: '.$data['name']."\nemail: ".$data['email']."\nmessage: \n".$data['message'])
-            ->html('<p>name: '.$data['name'].'</p><p>email: '.$data['email'].'</p><p>message: '.$data['message'].'</p>');
+            ->text('name: '.$data->getFirstname().' '.$data->getLastname()."\nemail: ".$data->getEmail()."\nmessage: \n".$data->getMessage())
+            ->html('<p>name: '.$data->getFirstname().' '.$data->getLastname().'</p><p>email: '.$data->getEmail().'</p><p>message: '.$data->getMessage().'</p>');
 
         try {
             $this->mailer->send($email);

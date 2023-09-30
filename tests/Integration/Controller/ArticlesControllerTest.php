@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace App\Tests\Integration\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 
 Class ArticlesControllerTest extends WebTestCase
-{ 
-    use RefreshDatabaseTrait;
-
+{
     /**
      * [Description for $databaseTool]
      *

@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace App\Tests\Integration\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 
 Class ContactControllerTest extends WebTestCase
-{ 
-    use RefreshDatabaseTrait;
-
+{
     /**
      * [Description for $databaseTool]
      *
@@ -86,9 +83,10 @@ Class ContactControllerTest extends WebTestCase
         $submit = $this->crawler->selectButton('Envoyer');
         $form = $submit->form();
 
-        $form['form[name]'] = 'Name';
-        $form['form[email]'] = 'test-email@test.com';
-        $form['form[message]'] = 'Message de test';
+        $form['contact[firstname]'] = 'Firstname';
+        $form['contact[lastname]'] = 'Lastname';
+        $form['contact[email]'] = 'test-email@test.com';
+        $form['contact[message]'] = 'Test message';
 
         $this->client->submit($form);
         $this->assertEmailCount(1);

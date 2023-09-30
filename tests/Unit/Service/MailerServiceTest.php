@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Service;
 
+use App\Entity\Contact;
 use App\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -48,11 +49,12 @@ class MailerServiceTest extends KernelTestCase
      */
     public function testSendEmail(): void
     {
-        $data = [
-            'name' => 'test',
-            'email' => 'test-email@test.com',
-            'message' => 'Message de test'
-        ];
+        $data = new Contact();
+        
+        $data->setFirstname('Firstname');
+        $data->setLastname('Lastname');
+        $data->setEmail('email@test.com');
+        $data->setMessage('Test message');
 
         $this->assertEquals(0, $this->mailer->sendEmail($data));
     }

@@ -9,25 +9,26 @@ services:
       dockerfile: ./tools/docker/php/Dockerfile
     container_name: test-server
     environment:
-      BDD_VERSION: ${MYSQL_VERSION:-5.7}
-      BDD_TYPE: mysql
-      BDD_HOST: mysql
-      BDD_PORT: ${MYSQL_PORT:-3306}
-      BDD_CHARSET: ${MYSQL_CHARSET:-utf8mb4}
-      BDD_USER: ${MYSQL_USER:-user}
-      BDD_PASSWORD: ${MYSQL_PASSWORD:-resu}
-      BDD_DATABASE: ${MYSQL_DATABASE:-app}
+      BDD_VERSION: ${DB_VERSION:-5.7}
+      BDD_TYPE: ${DB_TYPE:-mysql}
+      BDD_HOST: ${DB_HOST:-mysql}
+      BDD_PORT: ${DB_PORT:-3306}
+      BDD_CHARSET: ${DB_CHARSET:-utf8mb4}
+      BDD_USER: ${DB_USER:-user}
+      BDD_PASSWORD: ${DB_PASSWORD:-resu}
+      BDD_DATABASE: ${DB_DATABASE:-app}
     volumes:
       - ./:/var/www/html:rw
     labels:
-      - "traefik.http.routers.app1.rule=Host(`test-docker-symfony.traefik.me`)"
-      - "traefik.http.routers.app1-tls.tls.domains[0].main=test-docker-symfony.traefik.me"
-      - "traefik.http.routers.app1-tls.tls.domains[0].sans=test-docker-symfony-*.traefik.me"
-      - "traefik.http.routers.app1.tls=true"
+      - "traefik.http.routers.test-server.rule=Host(`test-docker-symfony.traefik.me`)"
+      - "traefik.http.routers.test-server-tls.tls.domains[0].main=test-docker-symfony.traefik.me"
+      - "traefik.http.routers.test-server-tls.tls.domains[0].sans=test-docker-symfony-*.traefik.me"
+      - "traefik.http.services.test-server.loadbalancer.server.port=80"
+      - "traefik.http.routers.test-server.tls=true"
     links:
       - mysql
       - redis
-
+      
   adminer:
     image: ${DOCKER_REGISTRY}/test-adminer:v1.0.0
     build:
@@ -40,23 +41,23 @@ services:
       - ./var/db:/var/www/html/var/db:rw
 
   mysql:
-    image: mysql:${MYSQL_VERSION:-5.7}
+    image: mysql:${DB_VERSION:-5.7}
     container_name: test-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-toor}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
-      MYSQL_USER: ${MYSQL_USER:-user}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-resu}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-toor}
+      MYSQL_DATABASE: ${DB_DATABASE:-app}
+      MYSQL_USER: ${DB_USER:-user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-resu}
     ports:
-      - ${MYSQL_PORT}:${MYSQL_PORT}
+      - ${DB_PORT}:${DB_PORT}
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: test-phpmyadmin
     environment:
-      - PMA_HOST=mysql
+      - PMA_HOST=${DB_HOST:-mysql}
       - PMA_USER=root
-      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-toor}
+      - PMA_PASSWORD=${DB_ROOT_PASSWORD:-toor}
     links:
       - mysql
     ports:
@@ -86,10 +87,10 @@ services:
     labels:
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
     volumes:
-      - ./tools/docker/traefik/traefik.yml:/etc/traefik/traefik.yml
-      - ./tools/docker/traefik/tls.yml:/etc/traefik/tls.yml
+      - ./tools/docker/traefik/traefik.yml:/etc/traefik/traefik.yml:rw
+      - ./tools/docker/traefik/tls.yml:/etc/traefik/tls.yml:rw
       - /var/run/docker.sock:/var/run/docker.sock
-      - certs:/etc/ssl/traefik
+      - certs:/etc/ssl/traefik:rw
 
   reverse-proxy-https-helper:
     image: alpine
@@ -98,7 +99,7 @@ services:
       && wget traefik.me/cert.pem -O cert.pem
       && wget traefik.me/privkey.pem -O privkey.pem"
     volumes:
-      - certs:/etc/ssl/traefik
+      - certs:/etc/ssl/traefik:rw
 
 volumes:
   certs:
