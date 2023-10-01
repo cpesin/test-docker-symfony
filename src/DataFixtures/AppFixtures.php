@@ -40,8 +40,8 @@ class AppFixtures extends Fixture
             $article->setTitle($faker->sentence($faker->numberBetween(3, 6)));
             $article->setText($faker->realText($maxNbChars = 500, $indexSize = 5));
             $article->setState($faker->boolean($chanceOfGettingTrue = 90));
-            $article->setCreated($faker->dateTimeInInterval($startDate = '-2 years', $interval = '+1 year', $timezone = 'Europe/Paris'));
-            $article->setUpdated($faker->dateTimeInInterval($startDate = '-6 months', $interval = '+3 months', $timezone = 'Europe/Paris'));
+            $article->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeInInterval($startDate = '-2 years', $interval = '+1 year', $timezone = 'Europe/Paris')));
+            $article->setUpdatedAt($faker->dateTimeInInterval($startDate = '-6 months', $interval = '+3 months', $timezone = 'Europe/Paris'));
 
             $article->setAuthor($authors[random_int(0, 7)]);
 

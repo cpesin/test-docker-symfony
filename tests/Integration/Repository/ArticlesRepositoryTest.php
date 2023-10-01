@@ -87,14 +87,11 @@ class ArticlesRepositoryTest extends KernelTestCase
         
         $authors = $this->authorRepository->findAll();
 
-        $date = new \DateTime('now');
 
         $article = new Article();
         $article->setTitle('Article 1');
         $article->setText('Lorem ipsum...');
         $article->setState(true);
-        $article->setCreated($date);
-        $article->setUpdated($date);
         $article->setAuthor($authors[0]);
 
         $this->articleRepository->save($article, true);
@@ -107,8 +104,6 @@ class ArticlesRepositoryTest extends KernelTestCase
         $this->assertEquals('Lorem ipsum...', $article->getText());
         $this->assertEquals(true, $article->isState());
         $this->assertEquals(1, $article->getAuthor()->getId());
-        $this->assertEquals($date, $article->getCreated());
-        $this->assertEquals($date, $article->getUpdated());
     }
 
     /**

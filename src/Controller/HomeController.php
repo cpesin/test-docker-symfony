@@ -22,7 +22,7 @@ class HomeController extends AbstractController
     {
         $lastArticle = $articleRepository->findOneBy(
             ['state' => 1],
-            ['created' => 'DESC']
+            ['createdAt' => 'DESC']
         );
 
         return $this->render('home/index.html.twig', [
