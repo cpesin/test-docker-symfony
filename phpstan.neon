@@ -3,5 +3,6 @@ parameters:
 	paths:
 		- src
 	ignoreErrors:
-		- '#Parameter \#1 \$data of method App\\Service\\Mailer::sendEmail\(\) expects App\\Entity\\Contact, mixed given.#'
 		- '#Call to an undefined method Faker\\Generator.*#'
+		- '#Parameter \#1 \$entity of method App\\Repository\\ContactRepository::save\(\) expects App\\Entity\\Contact, mixed given.#'
+		- '#Parameter \#1 \$data of method App\\Service\\Mailer::sendContactEmail\(\) expects App\\Entity\\Contact, mixed given.#'

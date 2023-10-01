@@ -50,13 +50,12 @@ class MailerServiceTest extends KernelTestCase
     public function testSendEmail(): void
     {
         $data = new Contact();
-        
         $data->setFirstname('Firstname');
         $data->setLastname('Lastname');
         $data->setEmail('email@test.com');
         $data->setMessage('Test message');
 
-        $this->assertEquals(0, $this->mailer->sendEmail($data));
+        $this->assertEquals(0, $this->mailer->sendContactEmail($data));
     }
 
     /**

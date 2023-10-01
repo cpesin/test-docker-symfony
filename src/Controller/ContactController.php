@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Repository\ContactRepository;
 use App\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,7 @@ class ContactController extends AbstractController
      * [Description for index].
      */
     #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
-    public function index(Request $request, Mailer $mailer): Response
+    public function index(Request $request, Mailer $mailer, ContactRepository $repository): Response
     {
         $contact = new Contact();
 
@@ -32,7 +33,9 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $mailer->sendEmail($data);
+            $repository->save($data, true);
+
+            $mailer->sendContactEmail($data);
 
             return $this->redirectToRoute('app_contact_send');
         }

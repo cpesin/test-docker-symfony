@@ -29,12 +29,12 @@ class Mailer
     /**
      * [Description for sendEmail].
      */
-    public function sendEmail(Contact $data): int
+    public function sendContactEmail(Contact $data): int
     {
         $email = (new Email())
             ->from('hello@example.com')
             ->to('email-de-test@test.com')
-            ->subject('[test] Time for Symfony Mailer!')
+            ->subject('Contact : '.$data->getFirstname().' '.$data->getLastname())
             ->text('name: '.$data->getFirstname().' '.$data->getLastname()."\nemail: ".$data->getEmail()."\nmessage: \n".$data->getMessage())
             ->html('<p>name: '.$data->getFirstname().' '.$data->getLastname().'</p><p>email: '.$data->getEmail().'</p><p>message: '.$data->getMessage().'</p>');
 
