@@ -22,7 +22,7 @@ class ArticlesController extends AbstractController
     {
         $articles = $articleRepository->findBy(
             ['state' => 1],
-            ['created' => 'DESC']
+            ['createdAt' => 'DESC']
         );
 
         return $this->render('articles/index.html.twig', [

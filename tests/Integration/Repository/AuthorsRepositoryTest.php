@@ -111,7 +111,7 @@ class AuthorsRepositoryTest extends KernelTestCase
     {
         $article = $this->articleRepository->findOneBy(
             ['state' => 1],
-            ['created' => 'DESC']
+            ['createdAt' => 'DESC']
         );
         
         $author = new Author();
@@ -135,7 +135,7 @@ class AuthorsRepositoryTest extends KernelTestCase
     {
         $article = $this->articleRepository->findOneBy(
             ['state' => 1],
-            ['created' => 'DESC']
+            ['createdAt' => 'DESC']
         );
         
         $author = new Author();

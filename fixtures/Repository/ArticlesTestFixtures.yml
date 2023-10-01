@@ -3,6 +3,6 @@ App\Entity\Article:
     title: <sentence(3, 6)>
     text: <realText(500, 5)>
     state: <boolean()>
-    created: <dateTime()>
-    updated: <dateTime()>
+    createdAt: <(new DateTimeImmutable())>
+    updatedAt: <dateTime()>
     author: "@author*"

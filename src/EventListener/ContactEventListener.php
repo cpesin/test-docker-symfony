@@ -14,6 +14,8 @@ class ContactEventListener
 {
     public function setCreatedAtEvent(Contact $contact, PrePersistEventArgs $event): void
     {
-        $contact->setCreatedAt(new \DateTimeImmutable());
+        if (null === $contact->getCreatedAt()) {
+            $contact->setCreatedAt(new \DateTimeImmutable());
+        }
     }
 }
