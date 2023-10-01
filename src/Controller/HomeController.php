@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * [Description IndexController].
  */
-class IndexController extends AbstractController
+class HomeController extends AbstractController
 {
     /**
      * [Description for index].
@@ -25,7 +25,7 @@ class IndexController extends AbstractController
             ['created' => 'DESC']
         );
 
-        return $this->render('main/index.html.twig', [
+        return $this->render('home/index.html.twig', [
             'lastArticle' => $lastArticle,
             'readme' => $this->getReadMe(),
         ]);

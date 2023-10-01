@@ -2,6 +2,14 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app_articles') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app_articles') }}
+{% endblock %}
+
 {% block body %}
     <h2>{{ article.title }}</h2>
     <div class="article">
