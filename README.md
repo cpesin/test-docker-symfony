@@ -27,37 +27,40 @@ You need following sofwares to run this project :
 ## Installation
 
 Clone the project :
-`git clone https://github.com/cpesin/test-docker-symfony.git`
+``` Bash
+git clone https://github.com/cpesin/test-docker-symfony.git
+```
 
 Run containers :
-`make up`
+``` Bash
+make up
+```
 
 Install the project :
-`make install`
+``` Bash
+make install
+```
 
 Use `make bash` to enter in main container (server).
 
-Stop docker's containers with `make stop`.
+Stop docker's containers with 
+``` Bash
+make stop
+```
 
 ## Links
 
-Website :
-`https://test-docker-symfony.traefik.me/`
+Website : https://test-docker-symfony.traefik.me/
 
-Website's admin :
-`https://test-docker-symfony.traefik.me/admin`
+Website's admin : https://test-docker-symfony.traefik.me/admin
 
-PHPMyAdmin : 
-`http://localhost:8090`
+PHPMyAdmin : http://localhost:8090
 
-Mailcatcher : 
-`http://localhost:1080`
+Mailcatcher : http://localhost:1080
 
-Traefik : 
-`http://localhost:8081`
+Traefik : http://localhost:8081
 
-Adminer : 
-`http://localhost:8080`
+Adminer : http://localhost:8080
 
 With :
 - System : SQLite 3
@@ -68,18 +71,28 @@ With :
 ## Run tests
 
 Run phpUnit's tests :
-`make phpunit`
+``` Bash
+make phpunit
+```
 
 Run phpUnit's tests with code coverage :
-`make coverage`
+``` Bash
+make coverage
+```
 
 Code coverage is available at : `./coverage/index.html`
 
-Run phpCs (dry-run) :
-`make phpcs`
+Run phpCS (dry-run) :
+``` Bash
+make phpcs
+```
 
-Run phpCs (fix automatically) :
-`make phpcs_fix`
+Run phpCS (fix automatically) :
+``` Bash
+make phpcs_fix
+```
 
 Run phpStan :
-`make phpstan`
+``` Bash
+make phpstan
+```
