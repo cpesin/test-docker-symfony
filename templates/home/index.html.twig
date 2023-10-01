@@ -2,6 +2,14 @@
 
 {% block title %}Accueil{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app_home') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app_home') }}
+{% endblock %}
+
 {% block body %}
   {% if lastArticle is not empty %}
     <div class="card border-secondary mb-3">
