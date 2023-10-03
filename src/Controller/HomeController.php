@@ -9,14 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * [Description IndexController].
- */
 class HomeController extends AbstractController
 {
-    /**
-     * [Description for index].
-     */
     #[Route('/', name: 'app_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
@@ -31,9 +25,6 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /**
-     * [Description for getReadMe].
-     */
     private function getReadMe(): string
     {
         $readme = file_get_contents(__DIR__.'/../../README.md');

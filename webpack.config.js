@@ -25,6 +25,8 @@ Encore
     .addEntry('app_authors', './assets/authors.js')
     .addEntry('app_articles', './assets/articles.js')
     .addEntry('app_contact', './assets/contact.js')
+    .addEntry('app_register', './assets/register.js')
+    .addEntry('app_login', './assets/login.js')
 
     .addEntry('admin', './assets/admin/admin.js')
 
