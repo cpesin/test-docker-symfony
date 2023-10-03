@@ -66,8 +66,8 @@ migrations_run: ## Run Doctrine migrations
 	@$(SYMFONY) 'bin/console doctrine:migration:migrate --env=test --no-interaction'
 
 schema_update: ## Create database schema define in app
-	@$(SYMFONY) 'bin/console doctrine:schema:update --force --no-interaction'
-	@$(SYMFONY) 'bin/console doctrine:schema:update --env=test --force --no-interaction'
+	@$(SYMFONY) 'bin/console doctrine:schema:update --force --complete --no-interaction'
+	@$(SYMFONY) 'bin/console doctrine:schema:update --env=test --force --complete --no-interaction'
 
 fixtures_load: ## Load database's fixtures
 	@$(SYMFONY) 'bin/console doctrine:fixtures:load --no-interaction'
