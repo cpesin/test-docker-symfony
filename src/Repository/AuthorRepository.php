@@ -18,17 +18,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AuthorRepository extends ServiceEntityRepository
 {
-    /**
-     * [Description for __construct].
-     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Author::class);
     }
 
-    /**
-     * [Description for save].
-     */
     public function save(Author $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -38,9 +32,6 @@ class AuthorRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * [Description for remove].
-     */
     public function remove(Author $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

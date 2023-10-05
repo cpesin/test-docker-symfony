@@ -9,10 +9,10 @@ use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Events;
 
-#[AsEntityListener(event: Events::prePersist, method: 'setCreatedAtEvent', entity: Author::class)]
+#[AsEntityListener(event: Events::prePersist, method: 'persistAuthorEvent', entity: Author::class)]
 class AuthorEventListener
 {
-    public function setCreatedAtEvent(Author $author, PrePersistEventArgs $event): void
+    public function persistAuthorEvent(Author $author, PrePersistEventArgs $event): void
     {
         if (null === $author->getCreatedAt()) {
             $author->setCreatedAt(new \DateTimeImmutable());

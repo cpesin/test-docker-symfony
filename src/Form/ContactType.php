@@ -16,14 +16,8 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-/**
- * [Description ArticleType].
- */
 class ContactType extends AbstractType
 {
-    /**
-     * [Description for buildForm].
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -86,9 +80,6 @@ class ContactType extends AbstractType
         ;
     }
 
-    /**
-     * [Description for configureOptions].
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

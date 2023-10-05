@@ -14,14 +14,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-/**
- * [Description ArticleType].
- */
 class ArticleType extends AbstractType
 {
-    /**
-     * [Description for buildForm].
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -54,9 +48,6 @@ class ArticleType extends AbstractType
         ;
     }
 
-    /**
-     * [Description for configureOptions].
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

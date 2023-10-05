@@ -13,14 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * [Description ContactController].
- */
 class ContactController extends AbstractController
 {
-    /**
-     * [Description for index].
-     */
     #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
     public function index(Request $request, Mailer $mailer, ContactRepository $repository): Response
     {
@@ -45,9 +39,6 @@ class ContactController extends AbstractController
         ]);
     }
 
-    /**
-     * [Description for send].
-     */
     #[ROUTE('/contact/send', name: 'app_contact_send', methods: ['GET'])]
     public function send(Request $request): Response
     {
