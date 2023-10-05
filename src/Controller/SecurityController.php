@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -17,9 +17,10 @@ class SecurityController extends AbstractController
     {
         if ($this->getuser() instanceof User && $this->isGranted('ROLE_USER')) {
             $route = $this->isGranted('ROLE_ADMIN') ? 'admin_index' : 'account_index';
+
             return $this->redirectToRoute($route);
         }
-        
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 

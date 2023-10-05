@@ -1,8 +1,6 @@
 parameters:
-	level: 9
+	level: 5
 	paths:
 		- src
 	ignoreErrors:
 		- '#Call to an undefined method Faker\\Generator.*#'
-		- '#Parameter \#1 \$entity of method App\\Repository\\ContactRepository::save\(\) expects App\\Entity\\Contact, mixed given.#'
-		- '#Parameter \#1 \$data of method App\\Service\\Mailer::sendContactEmail\(\) expects App\\Entity\\Contact, mixed given.#'
