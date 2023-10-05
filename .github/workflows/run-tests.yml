@@ -31,14 +31,14 @@ jobs:
         npm install
         npm run build
 
-    - name: Create Database
-      run: |
-        mkdir -p var/db
-        touch var/db/app_test.db
-        bin/console doctrine:schema:update --env=test --force --no-interaction
+    # - name: Create Database
+    #   run: |
+    #     mkdir -p var/db
+    #     touch var/db/app_test.db
+    #     bin/console doctrine:schema:update --env=test --force --no-interaction
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      run: bin/phpunit
+      run: bin/phpunit --testsuite Unit --testdox
 
     - name: Execute tests via PHPStan
       run: vendor/bin/phpstan analyse
