@@ -4,14 +4,24 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\Article;
-use App\Entity\Author;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Faker;
+use App\Entity\User;
+use App\Entity\Author;
+use App\Entity\Article;
+use App\Entity\Contact;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private UserPasswordHasherInterface $userPasswordHasher;
+
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    {
+        $this->userPasswordHasher = $userPasswordHasher;
+    }
+    
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -42,6 +52,32 @@ class AppFixtures extends Fixture
             $manager->persist($article);
         }
 
+        $manager->flush();
+
+        for ($i = 0; $i < 10; ++$i) {
+            $contact = new Contact();
+            $contact->setFirstname($faker->firstname());
+            $contact->setLastname($faker->lastname());
+            $contact->setEmail($faker->email());
+            $contact->setMessage($faker->realText($maxNbChars = 200, $indexSize = 5));
+
+            $manager->persist($contact);
+        }
+
+        $manager->flush();
+
+        $user = new User();
+        $user->setEmail('test@test.com');
+        $user->setPassword(
+            $this->userPasswordHasher->hashPassword(
+                $user,
+                '123456'
+            )
+        );
+        $user->setRoles(["ROLE_ADMIN"]);
+        $user->setIsVerified(true);
+
+        $manager->persist($user);
         $manager->flush();
     }
 }
