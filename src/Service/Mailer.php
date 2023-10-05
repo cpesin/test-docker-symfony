@@ -8,27 +8,15 @@ use App\Entity\Contact;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
-/**
- * [Description Mailer].
- */
 class Mailer
 {
-    /**
-     * [Description for $mailer].
-     */
     private MailerInterface $mailer;
 
-    /**
-     * [Description for __construct].
-     */
     public function __construct(MailerInterface $mailer)
     {
         $this->mailer = $mailer;
     }
 
-    /**
-     * [Description for sendEmail].
-     */
     public function sendContactEmail(Contact $data): int
     {
         $email = (new Email())

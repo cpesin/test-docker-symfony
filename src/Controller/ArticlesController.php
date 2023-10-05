@@ -9,14 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * [Description ArticlesController].
- */
 class ArticlesController extends AbstractController
 {
-    /**
-     * [Description for index].
-     */
     #[Route('/articles', name: 'app_articles', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
