@@ -13,7 +13,7 @@
 {% block body %}
   {% if lastArticle is not empty %}
     <div class="card border-secondary mb-3">
-      <div class="card-header">Dernier article <em>({{ lastArticle.createdAt | format_datetime(locale='fr') }})</em></div>
+      <div class="card-header">{{ 'Dernier article'|trans }} <em>({{ lastArticle.createdAt | format_datetime(locale='fr') }})</em></div>
       <div class="card-body">
         <h4 class="card-title">{{ lastArticle.title }}</h4>
         <div class="card-text">

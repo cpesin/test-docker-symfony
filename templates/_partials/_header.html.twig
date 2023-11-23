@@ -7,20 +7,20 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link{% if app.request.get('_route') == 'app_index' %} active{% endif %}" href="{{ path('app_index') }}">Accueil
+          <a class="nav-link{% if app.request.get('_route') == 'app_index' %} active{% endif %}" href="{{ path('app_index') }}">{{ 'Accueil'|trans }}
             {% if app.request.get('_route') == 'app_index' %}<span class="visually-hidden">(current)</span>{% endif %}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link{% if app.request.get('_route') == 'app_articles' %} active{% endif %}" href="{{ path('app_articles') }}">Articles</a>
+          <a class="nav-link{% if app.request.get('_route') == 'app_articles' %} active{% endif %}" href="{{ path('app_articles') }}">{{ 'Articles'|trans }}</a>
             {% if app.request.get('_route') == 'app_articles' %}<span class="visually-hidden">(current)</span>{% endif %}
         </li>
         <li class="nav-item">
-          <a class="nav-link{% if app.request.get('_route') == 'app_authors' %} active{% endif %}" href="{{ path('app_authors') }}">Auteurs</a>
+          <a class="nav-link{% if app.request.get('_route') == 'app_authors' %} active{% endif %}" href="{{ path('app_authors') }}">{{ 'Auteurs'|trans }}</a>
             {% if app.request.get('_route') == 'app_authors' %}<span class="visually-hidden">(current)</span>{% endif %}
         </li>
         <li class="nav-item">
-          <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}" href="{{ path('app_contact') }}">Nous contacter</a>
+          <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}" href="{{ path('app_contact') }}">{{ 'Nous contacter'|trans }}</a>
             {% if app.request.get('_route') == 'app_contact' %}<span class="visually-hidden">(current)</span>{% endif %}
         </li>
       </ul>
@@ -28,20 +28,20 @@
         <ul class="navbar-nav">
           {% if is_granted("ROLE_ADMIN") %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ path('admin_index') }}">Administration</a>
+              <a class="nav-link" href="{{ path('admin_index') }}">{{ 'Administration'|trans }}</a>
             </li>
           {% endif %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('account_index') }}">Mon compte</a>
+            <a class="nav-link" href="{{ path('account_index') }}">{{ 'Mon compte'|trans }}</a>
           </li>
         </ul>
       {% else %}
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_register') }}">Créer un compte</a>
+            <a class="nav-link" href="{{ path('app_register') }}">{{ 'Créer un compte'|trans }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_login') }}">Me connecter</a>
+            <a class="nav-link" href="{{ path('app_login') }}">{{ 'Me connecter'|trans }}</a>
           </li>
         </ul>
       {% endif %}

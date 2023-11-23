@@ -14,6 +14,6 @@
     <h2>{{ article.title }}</h2>
     <div class="article">
         <p>{{ article.text }} ...</p>
-        <p>Créé le {{ article.createdAt | format_datetime(locale='fr') }} par {{ article.author.firstname }} {{ article.author.lastname }}</p>
+        <p>{{ 'Créé le'|trans }} {{ article.createdAt | format_datetime(locale='fr') }} {{ 'par'|trans }} {{ article.author.firstname }} {{ article.author.lastname }}</p>
     </div>
 {% endblock %}

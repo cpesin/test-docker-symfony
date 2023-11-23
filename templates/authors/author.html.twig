@@ -11,12 +11,12 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Liste des articles de {{ author.firstname }} {{ author.lastname }}</h2>
+    <h2>{{ 'Liste des articles de'|trans }} {{ author.firstname }} {{ author.lastname }}</h2>
     <div class="list">
         {% for article in author.articles %}
         <div class="article">
             <h3><a href="{{ path('app_article', { 'id': article.id }) }}">{{ article.title }}</a></h3>
-            <p>Créé le {{ article.createdAt | format_datetime(locale='fr') }}</p>
+            <p>{{ 'Créé le'|trans }} {{ article.createdAt | format_datetime(locale='fr') }}</p>
         </div>
         {% endfor %}
     </div>

@@ -3,3 +3,36 @@ Lastname: Lastname
 Email: Email
 Message: Message
 Submit: Submit
+'Dernier article': '__Dernier article'
+'Liste des articles': '__Liste des articles'
+'Créé le': '__Créé le'
+par: __par
+'Formulaire de contact': '__Formulaire de contact'
+'Merci pour votre message.': '__Merci pour votre message.'
+'Password Reset Email Sent': '__Password Reset Email Sent'
+'If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.': '__If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.'
+'This link will expire in': '__This link will expire in'
+"If you don't receive an email please check your spam folder or": "__If you don't receive an email please check your spam folder or"
+'try again': '__try again'
+'Reset your password': '__Reset your password'
+"Enter your email address, and we will send you a\n                link to reset your password.": "__Enter your email address, and we will send you a\n                link to reset your password."
+'Send password reset email': '__Send password reset email'
+Hi!: __Hi!
+'To reset your password, please visit the following link': '__To reset your password, please visit the following link'
+Cheers!: __Cheers!
+'Reset password': '__Reset password'
+'Hi! Please confirm your email!': '__Hi! Please confirm your email!'
+'Please confirm your email address by clicking the following link:': '__Please confirm your email address by clicking the following link:'
+'Confirm my Email': '__Confirm my Email'
+Register: __Register
+'Identifiez-vous !': '__Identifiez-vous !'
+'Liste des auteurs': '__Liste des auteurs'
+'Liste des articles de': '__Liste des articles de'
+Accueil: __Accueil
+Articles: __Articles
+Auteurs: __Auteurs
+'Nous contacter': '__Nous contacter'
+Administration: __Administration
+'Mon compte': '__Mon compte'
+'Créer un compte': '__Créer un compte'
+'Me connecter': '__Me connecter'
