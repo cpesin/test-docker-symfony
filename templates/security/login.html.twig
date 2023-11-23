@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="h3 mb-3 font-weight-normal">Identifiez-vous !</h1>
+    <h1 class="h3 mb-3 font-weight-normal">{{ 'Identifiez-vous !'|trans }}</h1>
     <form name="login" method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
