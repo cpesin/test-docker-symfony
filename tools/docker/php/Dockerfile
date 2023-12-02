@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
     librabbitmq-dev \
     libsqlite3-dev \
     libssh-dev \
+    libxslt1-dev \
     libzip-dev \
     libwebp-dev \
     nano \
@@ -55,7 +56,8 @@ RUN docker-php-ext-install \
     iconv \
     sockets \
     pcntl \
-    intl
+    intl \
+    xsl
 
 # Add php.ini custom config
 COPY ./tools/docker/config/php.ini /usr/local/etc/php/
