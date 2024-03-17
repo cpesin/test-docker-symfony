@@ -39,7 +39,7 @@ class ContactController extends AbstractController
         ]);
     }
 
-    #[ROUTE('/contact/send', name: 'app_contact_send', methods: ['GET'])]
+    #[Route('/contact/send', name: 'app_contact_send', methods: ['GET'])]
     public function send(Request $request): Response
     {
         return $this->render('contact/send.html.twig');
