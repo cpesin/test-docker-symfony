@@ -6,6 +6,12 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
 
+if (Encore.isProduction()) {
+    console.log('Mode : production');
+} else {
+    console.log('Mode : developpement');
+}
+
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
@@ -50,6 +56,7 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
+
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
 
@@ -71,7 +78,7 @@ Encore
     .enablePostCssLoader()
 
     // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+    .enableTypeScriptLoader()
 
     // uncomment if you use React
     .enableReactPreset()
@@ -81,7 +88,7 @@ Encore
     .enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    .autoProvidejQuery()
+    //.autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();
