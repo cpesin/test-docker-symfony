@@ -8,6 +8,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 
+/**
+ * /!\ WARNING: 
+ * Developpement purpose only !
+ * 
+ * Best pratices:
+ * Hardcoding the request URLs is a best practice for application tests. 
+ * If the test generates URLs using the Symfony router, it won't detect any change made to the application URLs which may impact the end users.
+ * Source: https://symfony.com/doc/current/testing.html#making-requests
+ */
 class ApplicationAvailabilityTest extends WebTestCase
 {
     /**
@@ -41,8 +50,6 @@ class ApplicationAvailabilityTest extends WebTestCase
     private $router;
     
     /**
-     * [Description for $databaseTool]
-     *
      * @var AbstractDatabaseTool
      */
     private $databaseTool;
@@ -53,8 +60,18 @@ class ApplicationAvailabilityTest extends WebTestCase
     
         $this->debug = true;
 
-        $this->slugs = ['name' => 'test', 'id' => 1];
-        $this->excludes = ['admin_articles_delete', 'admin_authors_delete'];
+        $this->slugs = [
+            'name' => 'test', 
+            'id' => 1
+        ];
+
+        $this->excludes = [
+            'app_verify_email',
+            'app_reset_password',
+            'app_logout',
+            'account_',
+            'admin_',
+        ];
 
         $this->client = static::createClient();
         $this->container = self::getContainer();
@@ -74,8 +91,11 @@ class ApplicationAvailabilityTest extends WebTestCase
 
         $this->debug('>>> Start test');
         foreach ($allRoutes as $name => $route) {
-            if(true === \in_array($name, $this->excludes)) {
-                continue;
+
+            foreach ($this->excludes as $exclude) {
+                if (1 === \preg_match('/^'.$exclude.'(.*)/', $name)) {
+                    continue(2);
+                }    
             }
 
             $params = $this->getParams($route->getPath());
@@ -85,8 +105,8 @@ class ApplicationAvailabilityTest extends WebTestCase
                 $this->debug($name . ' : ' . $path);
                 $this->client->request('GET', $path);
                 $this->assertTrue($this->client->getResponse()->isSuccessful());
-            } catch(\Exception $e) {
-                $this->debug('>>> ERROR <<< : ' . $e);
+            } catch(\Exception) {
+                $this->fail('Error width route: '.$route->getPath());
             }        
         }
         $this->debug('<<< End test');
