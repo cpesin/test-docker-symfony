@@ -29,6 +29,6 @@ class HomeController extends AbstractController
     {
         $readme = file_get_contents(__DIR__.'/../../README.md');
 
-        return $readme ?? '';
+        return false !== $readme ? $readme : '';
     }
 }
