@@ -1,5 +1,5 @@
 # Base
-FROM php:8.2.11-apache-bookworm
+FROM php:8.2.18-apache-bookworm
 
 # Environment variables
 ENV WEB_FOLDER=/var/www/html
@@ -100,7 +100,7 @@ RUN pear config-set http_proxy "${http_proxy}" \
 RUN echo "extension=apcu.so\napc.enable_cli=on" > /usr/local/etc/php/conf.d/apcu.ini
 
 # X-Debug
-RUN pecl install xdebug-3.2.0 \
+RUN pecl install xdebug-3.3.2 \
     && echo 'xdebug.mode=develop,debug,coverage' >> /usr/local/etc/php/php.ini \
     && echo 'xdebug.client_host=host.docker.internal' >> /usr/local/etc/php/php.ini \
     && docker-php-ext-enable xdebug
