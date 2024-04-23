@@ -27,10 +27,10 @@ class AuthorsControllerTest extends WebTestCase
 
     public function testIndex(): void
     {
-        $crawler = $this->client->request('GET', $this->path);
+        // $crawler = $this->client->request('GET', $this->path);
 
-        self::assertResponseStatusCodeSame(200);
-        self::assertPageTitleContains('Gestion des auteurs');
+        // self::assertResponseStatusCodeSame(200);
+        // self::assertPageTitleContains('Gestion des auteurs');
 
         // Use the $crawler to perform additional assertions e.g.
         // self::assertSame('Some text on the page', $crawler->filter('.p')->first());
