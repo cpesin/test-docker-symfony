@@ -11,7 +11,7 @@
 You can use this project to play with :
 
 * Docker
-* Symfony 6.3
+* Symfony 6.4 LTS
 * Mysql / PhpMyAdmin
 * Sqlite / Adminer
 * Redis
