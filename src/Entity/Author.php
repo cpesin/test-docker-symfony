@@ -38,6 +38,11 @@ class Author
         $this->articles = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->getFirstname().' '.$this->getLastname();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,10 +124,5 @@ class Author
         $this->createdAt = $createdAt;
 
         return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->getFirstname().' '.$this->getLastname();
     }
 }
