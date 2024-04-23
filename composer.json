@@ -44,6 +44,7 @@
         "friendsofphp/php-cs-fixer": "^3.13",
         "hautelook/alice-bundle": "^2.11",
         "liip/test-fixtures-bundle": "^2.4",
+        "nunomaduro/phpinsights": "^2.11",
         "phpro/grumphp": "^1.14",
         "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan-symfony": "^1.2",
@@ -64,7 +65,8 @@
             "symfony/flex": true,
             "symfony/runtime": true,
             "phpro/grumphp": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "optimize-autoloader": true,
         "preferred-install": {

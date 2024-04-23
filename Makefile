@@ -112,3 +112,6 @@ phpcs: ## Run php-cs-fixer with dry run
 
 phpstan: ## RUN phpstan
 	@$(SYMFONY) 'vendor/bin/phpstan analyse'
+
+phpinsights: ## RUN PHPinsight
+	@$(SYMFONY) 'vendor/bin/phpinsights --flush-cache -v'
